@@ -1,0 +1,90 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.puzzleshq'
+version = '1.0.0'
+
+sourceSets {
+    lwjgl2
+    lwjgl3
+    jogl
+    java2d
+
+    // Libgdx
+    gdxCore
+//    lwjgl3Gdx
+//    lwjgl2Gdx
+//    iosGdx
+//    androidGdx
+}
+
+configurations {
+    allImplementation
+
+    lwjgl3Implementation.extendsFrom(allImplementation)
+    lwjgl2Implementation.extendsFrom(allImplementation)
+    joglImplementation.extendsFrom(allImplementation)
+    java2dImplementation.extendsFrom(allImplementation)
+
+    allGdxImplementation
+    allGdxImplementation.extendsFrom(allImplementation)
+    gdxCoreImplementation.extendsFrom(allGdxImplementation)
+
+    allGdxBackendsImplementation
+    allGdxBackendsImplementation.extendsFrom(allGdxImplementation)
+//    lwjgl3GdxImplementation.extendsFrom(allGdxBackendsImplementation)
+//    lwjgl2GdxImplementation.extendsFrom(allGdxBackendsImplementation)
+//    iosGdxImplementation.extendsFrom(allGdxBackendsImplementation)
+//    androidGdxImplementation.extendsFrom(allGdxBackendsImplementation)
+}
+
+def natives(String lwjgl_natives) {
+    dependencies {
+        lwjgl3Implementation "org.lwjgl:lwjgl::$lwjgl_natives"
+        lwjgl3Implementation "org.lwjgl:lwjgl-opengl::$lwjgl_natives"
+        lwjgl3Implementation "org.lwjgl:lwjgl-glfw::$lwjgl_natives"
+    }
+}
+
+// All Implementations
+dependencies {
+    allImplementation "dev.puzzleshq:puzzle-annotations:$puzzle_annotations"
+
+    allGdxImplementation "com.badlogicgames.gdx:gdx:$gdx_version"
+    allGdxBackendsImplementation sourceSets.gdxCore.output
+
+    allImplementation project(":")
+}
+
+// LWJGL 3
+dependencies {
+    lwjgl3Implementation platform("org.lwjgl:lwjgl-bom:$lwjgl_3_version")
+
+    lwjgl3Implementation "org.lwjgl:lwjgl"
+    lwjgl3Implementation "org.lwjgl:lwjgl-opengl"
+    lwjgl3Implementation "org.lwjgl:lwjgl-glfw"
+    natives("natives-linux")
+    natives("natives-linux-arm32")
+    natives("natives-linux-arm64")
+    natives("natives-macos")
+    natives("natives-macos-arm64")
+    natives("natives-windows")
+    natives("natives-windows-arm64")
+    natives("natives-windows-x86")
+
+    lwjgl3Implementation "org.joml:joml:$joml_version"
+}
+
+// Libgdx
+dependencies {
+
+//    lwjgl2GdxImplementation "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdx_version"
+//    lwjgl2GdxImplementation "com.badlogicgames.gdx:gdx-platform:$gdx_version:natives-desktop"
+//
+//    lwjgl3GdxImplementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdx_version"
+//    lwjgl3GdxImplementation "com.badlogicgames.gdx:gdx-platform:$gdx_version:natives-desktop"
+
+}
+
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(8))
