@@ -1,8 +1,10 @@
 package dev.puzzleshq.surface.api.element.impl;
 
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.element.styles.ProgressBarStyle;
 import dev.puzzleshq.surface.api.screens.ISurface;
 
+@NeedsDocumentation
 public class ProgressBarElement extends AbstractElement {
 
     ProgressBarStyle style;
@@ -18,7 +20,7 @@ public class ProgressBarElement extends AbstractElement {
         this.width = 500;
         this.height = 30;
 
-        this.progress = 0;
+        this.progress = 50;
         this.max = 100;
 
         this.calculateStep();

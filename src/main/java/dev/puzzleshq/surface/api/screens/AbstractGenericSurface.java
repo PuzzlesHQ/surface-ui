@@ -1,21 +1,26 @@
 package dev.puzzleshq.surface.api.screens;
 
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.element.IElement;
 import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+@NeedsDocumentation
 public abstract class AbstractGenericSurface<T extends IRenderContext> implements ISurface<T>, ISurfaceInputProcessor {
 
-    protected Collection<IElement> elements;
+    protected Map<String, IElement> elementMap;
 
     protected boolean isInitialized;
 
     @Override
     public void init() {
-        elements = new ConcurrentLinkedQueue<>();
+        elementMap = new ConcurrentHashMap<>();
 
         isInitialized = true;
     }
@@ -26,18 +31,23 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
     }
 
     @Override
-    public void addElement(IElement element) {
-        this.elements.add(element);
+    public void addElement(String id, IElement element) {
+        this.elementMap.put(id, element);
     }
 
     @Override
-    public void removeElement(IElement element) {
-        this.elements.remove(element);
+    public IElement getElement(String id) {
+        return this.elementMap.get(id);
+    }
+
+    @Override
+    public void removeElement(String id) {
+        this.elementMap.remove(id);
     }
 
     @Override
     public void clearElements() {
-        this.elements.clear();
+        this.elementMap.clear();
     }
 
     @Override
@@ -45,12 +55,12 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
 
     @Override
     public Collection<IElement> getElementCollection() {
-        return elements;
+        return elementMap.values();
     }
 
     @Override
     public void onCharTyped(long window, int codepoint) {
-        for (IElement e : elements) {
+        for (IElement e : getElementCollection()) {
             if (e instanceof ISurfaceInputProcessor) {
                 ISurfaceInputProcessor element = (ISurfaceInputProcessor) e;
                 element.onCharTyped(window, codepoint);
@@ -60,7 +70,7 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
 
     @Override
     public void onCursorEnter(long window, boolean entered) {
-        for (IElement e : elements) {
+        for (IElement e : getElementCollection()) {
             if (e instanceof ISurfaceInputProcessor) {
                 ISurfaceInputProcessor element = (ISurfaceInputProcessor) e;
                 element.onCursorEnter(window, entered);
@@ -70,7 +80,7 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
 
     @Override
     public void onCursorMove(long window, double x, double y) {
-        for (IElement e : elements) {
+        for (IElement e : getElementCollection()) {
             if (e instanceof ISurfaceInputProcessor) {
                 ISurfaceInputProcessor element = (ISurfaceInputProcessor) e;
                 element.onCursorMove(window, x, y);
@@ -80,7 +90,7 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
 
     @Override
     public void onFileDropped(long window, int count, long paths) {
-        for (IElement e : elements) {
+        for (IElement e : getElementCollection()) {
             if (e instanceof ISurfaceInputProcessor) {
                 ISurfaceInputProcessor element = (ISurfaceInputProcessor) e;
                 element.onFileDropped(window, count, paths);
@@ -90,7 +100,7 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
 
     @Override
     public void onKeyPress(long window, int key, int scancode, int action, int mods) {
-        for (IElement e : elements) {
+        for (IElement e : getElementCollection()) {
             if (e instanceof ISurfaceInputProcessor) {
                 ISurfaceInputProcessor element = (ISurfaceInputProcessor) e;
                 element.onKeyPress(window, key, scancode, action, mods);
@@ -100,7 +110,7 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
 
     @Override
     public void onMouseClick(long window, int button, int action, int mods) {
-        for (IElement e : elements) {
+        for (IElement e : getElementCollection()) {
             if (e instanceof ISurfaceInputProcessor) {
                 ISurfaceInputProcessor element = (ISurfaceInputProcessor) e;
                 element.onMouseClick(window, button, action, mods);
@@ -110,7 +120,7 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
 
     @Override
     public void onScroll(long window, double xOffset, double yOffset) {
-        for (IElement e : elements) {
+        for (IElement e : getElementCollection()) {
             if (e instanceof ISurfaceInputProcessor) {
                 ISurfaceInputProcessor element = (ISurfaceInputProcessor) e;
                 element.onScroll(window, xOffset, yOffset);

@@ -4,7 +4,7 @@ import dev.puzzleshq.surface.api.element.impl.AbstractElement;
 import dev.puzzleshq.surface.api.element.impl.ButtonElement;
 import dev.puzzleshq.surface.api.element.styles.ButtonStyle;
 import dev.puzzleshq.surface.awt.rendering.context.impl.AWTQuadrentSpace;
-import dev.puzzleshq.surface.api.rendering.context.ScreenBounds;
+import dev.puzzleshq.surface.awt.rendering.context.ScreenBounds;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.awt.rendering.context.impl.AWTRenderContext;

@@ -1,16 +1,16 @@
 package dev.puzzleshq.surface.awt.component;
 
+import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.awt.rendering.context.impl.AWTRenderContext;
-import dev.puzzleshq.surface.awt.screens.AbstractAWTSurface;
 
 import java.awt.*;
 
 public class SurfaceAdapter extends Component {
 
-    AbstractAWTSurface surface;
+    ISurface surface;
     AWTRenderContext context;
 
-    public SurfaceAdapter(AbstractAWTSurface surface) {
+    public SurfaceAdapter(ISurface surface) {
         this.surface = surface;
         this.context = new AWTRenderContext(null, getWidth(), getHeight());
     }

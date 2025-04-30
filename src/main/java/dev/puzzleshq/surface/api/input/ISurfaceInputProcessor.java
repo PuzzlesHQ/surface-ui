@@ -1,5 +1,8 @@
 package dev.puzzleshq.surface.api.input;
 
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
+
+@NeedsDocumentation
 public interface ISurfaceInputProcessor {
 
     default void onScroll(long window, double xOffset, double yOffset){}

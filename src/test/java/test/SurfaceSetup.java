@@ -1,12 +1,9 @@
 package test;
 
-import dev.puzzleshq.surface.api.element.impl.ButtonElement;
 import dev.puzzleshq.surface.api.element.impl.ProgressBarElement;
-import dev.puzzleshq.surface.api.element.styles.ButtonStyle;
 import dev.puzzleshq.surface.api.element.styles.ProgressBarStyle;
 import dev.puzzleshq.surface.api.rendering.AnchorX;
 import dev.puzzleshq.surface.api.rendering.AnchorY;
-import dev.puzzleshq.surface.api.screens.AbstractGenericSurface;
 import dev.puzzleshq.surface.api.screens.ISurface;
 
 import java.awt.*;
@@ -54,10 +51,10 @@ public class SurfaceSetup {
 //        ButtonElement buttonElement = new ButtonElement(ButtonStyle.DEFAULT);
 //        buttonElement.setAnchors(AnchorX.RIGHT, AnchorY.TOP);
 
-        surface.addElement(ramUsageBar);
-        surface.addElement(bar1);
-        surface.addElement(bar2);
-        surface.addElement(bar3);
+        surface.addElement("ram-usage-bar", ramUsageBar);
+        surface.addElement("progress-bar-1", bar1);
+        surface.addElement("progress-bar-2", bar2);
+        surface.addElement("progress-bar-3", bar3);
 //        surface.addElement(buttonElement);
     }
 

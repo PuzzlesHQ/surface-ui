@@ -1,7 +1,9 @@
 package dev.puzzleshq.surface.api.element.impl;
 
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.element.styles.ButtonStyle;
 
+@NeedsDocumentation
 public class ButtonElement extends AbstractElement {
 
     protected ButtonStyle style;

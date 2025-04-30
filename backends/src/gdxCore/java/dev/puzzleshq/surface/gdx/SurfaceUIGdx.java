@@ -2,7 +2,6 @@ package dev.puzzleshq.surface.gdx;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import dev.puzzleshq.surface.SurfaceUI;
 import dev.puzzleshq.surface.api.element.impl.ButtonElement;
 import dev.puzzleshq.surface.api.element.impl.ProgressBarElement;
 import dev.puzzleshq.surface.api.module.AbstractSurfaceModule;

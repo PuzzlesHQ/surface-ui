@@ -1,5 +1,9 @@
-package dev.puzzleshq.surface.api.rendering.context;
+package dev.puzzleshq.surface.awt.rendering.context;
 
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
+
+/* Note: this is here for things that dont have a viewport */
+@NeedsDocumentation
 public final class ScreenBounds {
 
     private int x, y, width, height;

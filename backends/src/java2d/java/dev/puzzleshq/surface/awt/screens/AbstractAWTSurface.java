@@ -19,7 +19,7 @@ public abstract class AbstractAWTSurface extends AbstractGenericSurface<AWTRende
     public void render(AWTRenderContext context) {
         Graphics graphics = context.getGraphics();
 
-        for (IElement element : elements) {
+        for (IElement element : getElementCollection()) {
             IElementRenderer renderer = element.getRenderer(SurfaceUISwing.INSTANCE);
             if (renderer != null)
                 renderer.render(this, context, element);

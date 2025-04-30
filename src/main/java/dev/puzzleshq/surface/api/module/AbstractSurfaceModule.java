@@ -1,6 +1,6 @@
 package dev.puzzleshq.surface.api.module;
 
-import dev.puzzleshq.surface.SurfaceUI;
+import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.element.IElement;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
@@ -17,7 +17,7 @@ public abstract class AbstractSurfaceModule<C extends IRenderContext> implements
         this.rendererMap = new ConcurrentHashMap<>();
         this.name = name;
 
-        SurfaceUI.register(name, this);
+        SurfaceSupervisor.register(name, this);
     }
 
     @Override

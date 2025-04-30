@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.puzzleshq'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+// All Implementations
+dependencies {
+    implementation "dev.puzzleshq:puzzle-annotations:$puzzle_annotations"
+
+    implementation "org.hjson:hjson:$hjson_version"
+    implementation project(":")
+    implementation 'org.mozilla:rhino:1.8.0'
+}
+
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(11))

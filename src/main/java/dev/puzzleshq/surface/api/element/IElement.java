@@ -1,12 +1,13 @@
 package dev.puzzleshq.surface.api.element;
 
-import dev.puzzleshq.surface.api.io.IElementSerializer;
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.module.ISurfaceModule;
 import dev.puzzleshq.surface.api.rendering.AnchorX;
 import dev.puzzleshq.surface.api.rendering.AnchorY;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
 import dev.puzzleshq.surface.api.screens.ISurface;
 
+@NeedsDocumentation
 public interface IElement {
 
     void update(final ISurface surface, final float delta);

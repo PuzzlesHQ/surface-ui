@@ -1,7 +1,10 @@
 package dev.puzzleshq.surface.api.element.styles;
 
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
+
 import java.awt.*;
 
+@NeedsDocumentation
 public class ProgressBarStyle {
 
     Color foregroundFull;

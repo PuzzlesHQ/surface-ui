@@ -1,6 +1,6 @@
 package dev.puzzleshq.surface.awt.rendering.context.impl;
 
-import dev.puzzleshq.surface.api.rendering.context.ScreenBounds;
+import dev.puzzleshq.surface.awt.rendering.context.ScreenBounds;
 
 import java.awt.*;
 

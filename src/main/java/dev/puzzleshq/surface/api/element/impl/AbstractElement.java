@@ -1,14 +1,14 @@
 package dev.puzzleshq.surface.api.element.impl;
 
-import dev.puzzleshq.surface.SurfaceUI;
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.element.IElement;
-import dev.puzzleshq.surface.api.io.IElementSerializer;
 import dev.puzzleshq.surface.api.module.ISurfaceModule;
 import dev.puzzleshq.surface.api.rendering.AnchorX;
 import dev.puzzleshq.surface.api.rendering.AnchorY;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
 import dev.puzzleshq.surface.api.screens.ISurface;
 
+@NeedsDocumentation
 public abstract class AbstractElement implements IElement {
 
     protected boolean visibility;

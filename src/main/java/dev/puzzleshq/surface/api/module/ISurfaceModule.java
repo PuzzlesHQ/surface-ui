@@ -1,11 +1,13 @@
 package dev.puzzleshq.surface.api.module;
 
+import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.element.IElement;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
 
 import java.util.Map;
 
+@NeedsDocumentation
 public interface ISurfaceModule<C extends IRenderContext> {
 
     String getName();

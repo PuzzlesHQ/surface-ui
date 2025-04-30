@@ -1,0 +1,133 @@
+package dev.puzzleshq.surface.cereal.io;
+
+import dev.puzzleshq.surface.api.element.IElement;
+import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
+import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
+import dev.puzzleshq.surface.api.screens.AbstractGenericSurface;
+import dev.puzzleshq.surface.api.screens.ISurface;
+import dev.puzzleshq.surface.cereal.CerealSupervisor;
+import dev.puzzleshq.surface.cereal.js.Java;
+import org.mozilla.javascript.*;
+
+import java.io.IOException;
+import java.io.StringReader;
+
+public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
+
+    Context surfaceContext;
+
+    Scriptable scope;
+
+    Object outputStream;
+    Object surface;
+    Object java;
+
+    String scriptName = null;
+    String scriptText = null;
+
+    public ScriptedSurface() {
+        super();
+        super.init();
+    }
+
+    public void setScript(String scriptName, String scriptText) {
+        this.scriptName = scriptName;
+        this.scriptText = scriptText;
+    }
+
+    Object onRender;
+    Object onUpdate;
+
+    @Override
+    public void init() {
+
+        if (scriptText != null && scriptName != null) {
+            surfaceContext = CerealSupervisor.createContext();
+            scope = surfaceContext.initSafeStandardObjects();
+
+            this.outputStream = Context.javaToJS(System.out, scope, surfaceContext);
+            this.java = Context.javaToJS(Java.INSTANCE, scope, surfaceContext);
+            this.surface = Context.javaToJS(this, scope, surfaceContext);
+            ScriptableObject.putProperty(scope, "Sysout", outputStream);
+            ScriptableObject.putProperty(scope, "Java", java);
+            ScriptableObject.putProperty(scope, "thisSurface", surface);
+
+            try {
+                Script script = surfaceContext.compileReader(new StringReader(scriptText), scriptName, 0, null);
+                script.exec(surfaceContext, scope);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            Object initFunction = scope.get("init", scope);
+            if (initFunction instanceof Function) {
+                Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ surface });
+            }
+
+            this.onRender = scope.get("onRender", scope);
+            this.onUpdate = scope.get("onUpdate", scope);
+        }
+    }
+
+    @Override
+    public void render(IRenderContext context) {
+        if (this.onRender != null && this.onRender instanceof Function) {
+            Context.call(ContextFactory.getGlobal(), (Function) this.onRender, scope, scope, new Object[]{ context });
+//            ((Function) this.onRender).call(surfaceContext, scope, scope, new Object[]{ context });
+        }
+        for (IElement element : getElementCollection()) {
+            ((IElementRenderer)context.getParentModule().getElementRenderer(element.getClass())).render(
+                    this,
+                    context,
+                    element
+            );
+        }
+    }
+
+    @Override
+    public void update(float delta) {
+        if (this.onUpdate != null && this.onUpdate instanceof Function) {
+            Context.call(ContextFactory.getGlobal(), (Function) this.onUpdate, scope, scope, new Object[]{ delta });
+        }
+    }
+
+    @Override
+    public void preSwitchedTo(ISurface<?> currentSurface, ISurface<?> oldSurface) {
+        super.preSwitchedTo(currentSurface, oldSurface);
+
+        Object initFunction = scope.get("preSwitchedTo", scope);
+        if (initFunction instanceof Function) {
+            Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, oldSurface });
+        }
+    }
+
+    @Override
+    public void preSwitchSurface(ISurface<?> currentSurface, ISurface<?> newSurface) {
+        super.preSwitchSurface(currentSurface, newSurface);
+
+        Object initFunction = scope.get("preSwitchSurface", scope);
+        if (initFunction instanceof Function) {
+            Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, newSurface });
+        }
+    }
+
+    @Override
+    public void postSwitchedTo(ISurface<?> currentSurface, ISurface<?> oldSurface) {
+        super.postSwitchedTo(currentSurface, oldSurface);
+
+        Object initFunction = scope.get("preSwitchedTo", scope);
+        if (initFunction instanceof Function) {
+            Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, oldSurface });
+        }
+    }
+
+    @Override
+    public void postSwitchSurface(ISurface<?> currentSurface, ISurface<?> newSurface) {
+        super.postSwitchSurface(currentSurface, newSurface);
+
+        Object initFunction = scope.get("preSwitchSurface", scope);
+        if (initFunction instanceof Function) {
+            Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, newSurface });
+        }
+    }
+}

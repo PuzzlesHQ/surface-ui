@@ -16,7 +16,7 @@ public abstract class AbstractGdxSurface extends AbstractGenericSurface<GDXRende
     @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void render(GDXRenderContext context) {
-        for (IElement element : elements) {
+        for (IElement element : getElementCollection()) {
             IElementRenderer renderer = element.getRenderer(SurfaceUIGdx.INSTANCE);
             if (renderer != null)
                 renderer.render(this, context, element);

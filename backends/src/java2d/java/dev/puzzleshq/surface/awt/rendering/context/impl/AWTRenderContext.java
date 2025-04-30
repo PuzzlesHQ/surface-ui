@@ -1,8 +1,7 @@
 package dev.puzzleshq.surface.awt.rendering.context.impl;
 
 import dev.puzzleshq.surface.api.rendering.context.AbstractRenderContext;
-import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
-import dev.puzzleshq.surface.api.rendering.context.ScreenBounds;
+import dev.puzzleshq.surface.awt.rendering.context.ScreenBounds;
 import dev.puzzleshq.surface.awt.SurfaceUISwing;
 
 import java.awt.*;
@@ -10,16 +9,13 @@ import java.awt.*;
 public class AWTRenderContext extends AbstractRenderContext {
 
     public Graphics graphics;
-    private float vpWidth;
-    private float vpHeight;
     public ScreenBounds bounds;
     public AWTQuadrentSpace space;
+    public int prog;
 
     public AWTRenderContext(Graphics graphics, float vpWidth, float vpHeight) {
         super(SurfaceUISwing.INSTANCE, AbstractRenderContext.class.getSimpleName());
         this.graphics = graphics;
-        this.vpWidth = vpWidth;
-        this.vpHeight = vpHeight;
 
         this.bounds = new ScreenBounds(0, 0, (int) vpWidth, (int) vpHeight);
         this.space = new AWTQuadrentSpace(this.bounds);
