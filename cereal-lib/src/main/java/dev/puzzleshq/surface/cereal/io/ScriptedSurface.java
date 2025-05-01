@@ -7,6 +7,7 @@ import dev.puzzleshq.surface.api.screens.AbstractGenericSurface;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.cereal.CerealSupervisor;
 import dev.puzzleshq.surface.cereal.js.Java;
+import dev.puzzleshq.surface.cereal.js.SurfaceManager;
 import org.mozilla.javascript.*;
 
 import java.io.IOException;
@@ -17,10 +18,6 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
     Context surfaceContext;
 
     Scriptable scope;
-
-    Object outputStream;
-    Object surface;
-    Object java;
 
     String scriptName = null;
     String scriptText = null;
@@ -45,12 +42,9 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
             surfaceContext = CerealSupervisor.createContext();
             scope = surfaceContext.initSafeStandardObjects();
 
-            this.outputStream = Context.javaToJS(System.out, scope, surfaceContext);
-            this.java = Context.javaToJS(Java.INSTANCE, scope, surfaceContext);
-            this.surface = Context.javaToJS(this, scope, surfaceContext);
-            ScriptableObject.putProperty(scope, "Sysout", outputStream);
-            ScriptableObject.putProperty(scope, "Java", java);
-            ScriptableObject.putProperty(scope, "thisSurface", surface);
+            ScriptableObject.putProperty(scope, "Sysout", Context.javaToJS(System.out, scope, surfaceContext));
+            ScriptableObject.putProperty(scope, "Java", Context.javaToJS(Java.INSTANCE, scope, surfaceContext));
+            ScriptableObject.putProperty(scope, "SurfaceManager", Context.javaToJS(SurfaceManager.INSTANCE, scope, surfaceContext));
 
             try {
                 Script script = surfaceContext.compileReader(new StringReader(scriptText), scriptName, 0, null);
@@ -61,7 +55,7 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
 
             Object initFunction = scope.get("init", scope);
             if (initFunction instanceof Function) {
-                Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ surface });
+                Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ this });
             }
 
             this.onRender = scope.get("onRender", scope);

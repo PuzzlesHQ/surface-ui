@@ -7,19 +7,26 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import dev.puzzlehq.surface.gdx.lwjgl3.SurfaceUILwjgl3Gdx;
+import dev.puzzleshq.surface.api.screens.ISurface;
+import dev.puzzleshq.surface.cereal.io.SurfaceDeserializer;
 import dev.puzzleshq.surface.gdx.rendering.context.impl.GDXRenderContext;
+import dev.puzzleshq.util.RawAssetLoader;
+import dev.puzzleshq.util.ResourceLocation;
 
 public class MainApp extends ApplicationAdapter {
     private SpriteBatch batch;
-    private GameBootingScreenGDX screenGDX;
+    private ISurface screenGDX;
 
     private GDXRenderContext context;
     private int curWidth, curHeight;
 
     @Override
     public void create() {
+        SurfaceUILwjgl3Gdx.addSurfaceInputCapabilities();
+
         this.batch = new SpriteBatch();
-        this.screenGDX = new GameBootingScreenGDX();
+        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/mod-loading-screen.json")).getString());
         Camera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.up.set(0.0F, -1.0F, 0.0F);
         camera.direction.set(0.0F, 0.0F, 1.0F);

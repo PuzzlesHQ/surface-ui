@@ -3,6 +3,7 @@ package dev.puzzleshq.surface.cereal.js;
 import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.screens.ISurface;
 
+@JsIncluded
 public class Java {
 
     Runtime runtime = new Runtime();
@@ -17,6 +18,7 @@ public class Java {
         return SurfaceSupervisor.getSurface(id);
     }
 
+    @JsIncluded
     public static class Runtime {
 
         private java.lang.Runtime runtime = java.lang.Runtime.getRuntime();

@@ -6,18 +6,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import dev.puzzleshq.surface.api.module.AbstractSurfaceModule;
 import dev.puzzleshq.surface.api.module.ISurfaceModule;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
+import dev.puzzleshq.surface.gdx.SurfaceUIGdx;
 
 public class GDXRenderContext implements IRenderContext {
 
     private Batch batch;
     private Viewport viewport;
     private Camera camera;
-
-    public GDXRenderContext(AbstractSurfaceModule<?> module) {
-        this.batch = null;
-        this.viewport = null;
-        this.camera = null;
-    }
 
     public GDXRenderContext(Batch batch, Viewport viewport, Camera camera) {
         this.batch = batch;
@@ -56,7 +51,7 @@ public class GDXRenderContext implements IRenderContext {
 
     @Override
     public ISurfaceModule<?> getParentModule() {
-        return null;
+        return SurfaceUIGdx.INSTANCE;
     }
 
 }

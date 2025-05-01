@@ -1,0 +1,7 @@
+{
+  "id": "cereal:custom-element-renderer",
+  "script": "cereal:renderer/ui/custom-element-renderer.json",
+  "meta": {
+    "kys": "kill your self"
+  }
+}

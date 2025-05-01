@@ -40,7 +40,7 @@
         "style": "cereal:mod-loading-progress-bar"
       },
       "anchors": ["center", "none"],
-      "pos": [0, 80],
+      "pos": [0, 90],
       "size": [500, 30]
     },
     {

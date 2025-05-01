@@ -32,8 +32,8 @@ subprojects {
         println "Subproject: ${project.name}"
         if (project.name == "backends") {
             main.dependencies {
-                testImplementation sourceSets.getByName("java2d").output
                 testImplementation sourceSets.getByName("gdxCore").output
+                testImplementation sourceSets.getByName("gdxLwjgl3").output
             }
         }
     }

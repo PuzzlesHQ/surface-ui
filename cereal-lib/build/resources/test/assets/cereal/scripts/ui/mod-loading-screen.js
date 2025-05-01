@@ -1,24 +1,5 @@
-var thisSurface;
-var ramUsageBar;
-var prog = 0;
-
 function init(surface) {
-    thisSurface = surface;
-
-    Sysout.println("Hi " + thisSurface);
-
-    const runtime = Java.getRuntime();
-    const ramRange = (runtime.getMaxMemory() / (1024 * 1024));
-    const ramIncrement = 255 / ramRange;
-
-    ramUsageBar = thisSurface.getElement("ram-usage-bar");
-    ramUsageBar.setMax(ramRange);
-}
-
-function onRender(ctx) {
-    prog = prog + 1;
-    ramUsageBar.setProgress(prog);
-    Sysout.println("Look mum, Im rendering. " + prog);
+    Sysout.println("Hi " + surface);
 }
 
 // On Switch To
@@ -28,6 +9,13 @@ function preSwitchedTo(currentSurface, oldSurface) {
 
 function postSwitchedTo(currentSurface, oldSurface) {
     Sysout.println(`Post - Switching Surfaces from ${oldSurface} to ${currentSurface}`);
+
+//    const runtime = Java.getRuntime();
+//    const ramRange = (runtime.maxMemory() / (1024 * 1024));
+//    const ramIncrement = 255 / ramRange;
+//
+//    const ramUsageBar = currentSurface.get("ram-usage-bar");
+//    ramUsageBar.setMax(ramRange);
 }
 
 // On Switch Away

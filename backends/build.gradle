@@ -9,12 +9,11 @@ sourceSets {
     lwjgl2
     lwjgl3
     jogl
-    java2d
 
     // Libgdx
     gdxCore
-//    lwjgl3Gdx
-//    lwjgl2Gdx
+    gdxLwjgl3
+    gdxLwjgl2
 //    iosGdx
 //    androidGdx
 }
@@ -25,7 +24,6 @@ configurations {
     lwjgl3Implementation.extendsFrom(allImplementation)
     lwjgl2Implementation.extendsFrom(allImplementation)
     joglImplementation.extendsFrom(allImplementation)
-    java2dImplementation.extendsFrom(allImplementation)
 
     allGdxImplementation
     allGdxImplementation.extendsFrom(allImplementation)
@@ -33,8 +31,9 @@ configurations {
 
     allGdxBackendsImplementation
     allGdxBackendsImplementation.extendsFrom(allGdxImplementation)
-//    lwjgl3GdxImplementation.extendsFrom(allGdxBackendsImplementation)
-//    lwjgl2GdxImplementation.extendsFrom(allGdxBackendsImplementation)
+    gdxLwjgl3Implementation.extendsFrom(allGdxBackendsImplementation)
+    gdxLwjgl2Implementation.extendsFrom(allGdxBackendsImplementation)
+    lwjgl2GdxImplementation.extendsFrom(allGdxBackendsImplementation)
 //    iosGdxImplementation.extendsFrom(allGdxBackendsImplementation)
 //    androidGdxImplementation.extendsFrom(allGdxBackendsImplementation)
 }
@@ -79,11 +78,11 @@ dependencies {
 // Libgdx
 dependencies {
 
-//    lwjgl2GdxImplementation "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdx_version"
-//    lwjgl2GdxImplementation "com.badlogicgames.gdx:gdx-platform:$gdx_version:natives-desktop"
-//
-//    lwjgl3GdxImplementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdx_version"
-//    lwjgl3GdxImplementation "com.badlogicgames.gdx:gdx-platform:$gdx_version:natives-desktop"
+    gdxLwjgl2Implementation "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdx_version"
+    gdxLwjgl2Implementation "com.badlogicgames.gdx:gdx-platform:$gdx_version:natives-desktop"
+
+    gdxLwjgl3Implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdx_version"
+    gdxLwjgl3Implementation "com.badlogicgames.gdx:gdx-platform:$gdx_version:natives-desktop"
 
 }
 
