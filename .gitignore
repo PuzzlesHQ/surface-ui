@@ -18,3 +18,7 @@
 /backends/gradlew
 /backends/gradlew.bat
 /backends/gradle/wrapper/gradle-wrapper.jar
+/cereal-lib/.gradle
+/cereal-lib/gradlew
+/cereal-lib/gradlew.bat
+/cereal-lib/gradle/wrapper/gradle-wrapper.jar
