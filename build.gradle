@@ -127,4 +127,4 @@ wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))

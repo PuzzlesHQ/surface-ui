@@ -18,4 +18,4 @@ dependencies {
     implementation 'org.mozilla:rhino:1.8.0'
 }
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))

@@ -1,15 +1,18 @@
 package dev.puzzleshq.surface.cereal.io;
 
 import dev.puzzleshq.surface.api.element.IElement;
+import dev.puzzleshq.surface.api.input.SurfaceCoreInputProcessor;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
 import dev.puzzleshq.surface.api.screens.AbstractGenericSurface;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.cereal.CerealSupervisor;
+import dev.puzzleshq.surface.cereal.js.JSConsole;
 import dev.puzzleshq.surface.cereal.js.Java;
 import dev.puzzleshq.surface.cereal.js.SurfaceManager;
 import org.mozilla.javascript.*;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -21,6 +24,8 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
 
     String scriptName = null;
     String scriptText = null;
+
+    Color backgroundColor = null;
 
     public ScriptedSurface() {
         super();
@@ -42,9 +47,9 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
             surfaceContext = CerealSupervisor.createContext();
             scope = surfaceContext.initSafeStandardObjects();
 
-            ScriptableObject.putProperty(scope, "Sysout", Context.javaToJS(System.out, scope, surfaceContext));
             ScriptableObject.putProperty(scope, "Java", Context.javaToJS(Java.INSTANCE, scope, surfaceContext));
             ScriptableObject.putProperty(scope, "SurfaceManager", Context.javaToJS(SurfaceManager.INSTANCE, scope, surfaceContext));
+            ScriptableObject.putProperty(scope, "console", Context.javaToJS(JSConsole.INSTANCE, scope, surfaceContext));
 
             try {
                 Script script = surfaceContext.compileReader(new StringReader(scriptText), scriptName, 0, null);
@@ -65,6 +70,8 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
 
     @Override
     public void render(IRenderContext context) {
+        if (backgroundColor != null)
+            context.clearScreenWithColor(backgroundColor);
         if (this.onRender != null && this.onRender instanceof Function) {
             Context.call(ContextFactory.getGlobal(), (Function) this.onRender, scope, scope, new Object[]{ context });
 //            ((Function) this.onRender).call(surfaceContext, scope, scope, new Object[]{ context });
@@ -109,6 +116,8 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
     public void postSwitchedTo(ISurface<?> currentSurface, ISurface<?> oldSurface) {
         super.postSwitchedTo(currentSurface, oldSurface);
 
+        SurfaceCoreInputProcessor.setProcessor();
+
         Object initFunction = scope.get("preSwitchedTo", scope);
         if (initFunction instanceof Function) {
             Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, oldSurface });
@@ -124,4 +133,5 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
             Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, newSurface });
         }
     }
+
 }

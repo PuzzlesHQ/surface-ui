@@ -6,13 +6,11 @@ import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 @NeedsDocumentation
-public abstract class AbstractGenericSurface<T extends IRenderContext> implements ISurface<T>, ISurfaceInputProcessor {
+public abstract class AbstractGenericSurface<T extends IRenderContext> implements ISurface<T>, ISurfaceInputProcessor  {
 
     protected Map<String, IElement> elementMap;
 
@@ -128,4 +126,15 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
         }
     }
 
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        if (this.id != null) return;
+
+        this.id = id;
+    }
 }

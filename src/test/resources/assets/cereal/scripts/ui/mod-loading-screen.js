@@ -5,7 +5,7 @@ var prog = 0;
 function init(surface) {
     thisSurface = surface;
 
-    Sysout.println("Hi " + thisSurface);
+    console.log("Hi " + thisSurface);
 
     const runtime = Java.getRuntime();
     const ramRange = (runtime.getMaxMemory() / (1024 * 1024));
@@ -13,29 +13,41 @@ function init(surface) {
 
     ramUsageBar = thisSurface.getElement("ram-usage-bar");
     ramUsageBar.setMax(ramRange);
+
+    const testButton = thisSurface.getElement("button");
+    if (testButton != null) {
+//        testButton.setClickEvent(Java.toConsumer((btn) => {
+//            testButton.getClickEvent().apply(btn);
+//            Sysout.println("click");
+//        }));
+    }
 }
 
 function onRender(ctx) {
     prog = prog + 1;
     ramUsageBar.setProgress(prog);
-    Sysout.println("Look mum, Im rendering. " + prog);
+    console.error("Look mum, Im rendering. " + prog);
+
+            testButton.setClickEvent(Java.toConsumer((btn) => {
+                testButton.getClickEvent().apply(btn);
+                Sysout.println("click");
+            }));
 }
 
 // On Switch To
 function preSwitchedTo(currentSurface, oldSurface) {
-    Sysout.println(`Pre - Switching Surfaces from ${oldSurface} to ${currentSurface}`);
+    console.log(`Pre - Switching Surfaces from ${oldSurface} to ${currentSurface}`);
 }
 
 function postSwitchedTo(currentSurface, oldSurface) {
-    Sysout.println(`Post - Switching Surfaces from ${oldSurface} to ${currentSurface}`);
+    console.log(`Post - Switching Surfaces from ${oldSurface} to ${currentSurface}`);
 }
 
 // On Switch Away
 function preSwitchSurface(currentSurface, newSurface) {
-    Sysout.println(`Pre - Switching away Surfaces from ${currentSurface} to ${newSurface}`);
+    console.log(`Pre - Switching away Surfaces from ${currentSurface} to ${newSurface}`);
 }
 
 function postSwitchSurface(currentSurface, newSurface) {
-    Sysout.println(`Post - Switching away Surfaces from ${currentSurface} to ${newSurface}`);
-
+    console.log(`Post - Switching away Surfaces from ${currentSurface} to ${newSurface}`);
 }

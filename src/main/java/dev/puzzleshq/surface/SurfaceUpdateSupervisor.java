@@ -1,9 +1,9 @@
-package test;
+package dev.puzzleshq.surface;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class EventExecutor implements Runnable {
+public class SurfaceUpdateSupervisor implements Runnable {
 
     public static final Thread EVENT_THREAD;
     public static final Queue<Runnable> RUNNABLE_QUEUE;
@@ -13,11 +13,11 @@ public class EventExecutor implements Runnable {
     static {
         RUNNABLE_QUEUE = new ConcurrentLinkedQueue<>();
 
-        EVENT_THREAD = new Thread(new EventExecutor(), "EVENT-THREAD");
+        EVENT_THREAD = new Thread(new SurfaceUpdateSupervisor(), "SURFACE-UPDATE-THREAD");
         EVENT_THREAD.setDaemon(true);
     }
 
-    public EventExecutor() {
+    public SurfaceUpdateSupervisor() {
     }
 
     public static void start() {
@@ -26,8 +26,8 @@ public class EventExecutor implements Runnable {
 
     @Override
     public void run() {
-        while (!EventExecutor.RUNNABLE_QUEUE.isEmpty()) {
-            Runnable runnable = EventExecutor.RUNNABLE_QUEUE.poll();
+        while (!SurfaceUpdateSupervisor.RUNNABLE_QUEUE.isEmpty()) {
+            Runnable runnable = SurfaceUpdateSupervisor.RUNNABLE_QUEUE.poll();
             runnable.run();
         }
     }

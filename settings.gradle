@@ -1,3 +1,4 @@
 include 'backends'
 include 'cereal-lib'
 
+rootProject.name = "surface-ui"

@@ -33,10 +33,16 @@ public class ProgressBarStyle {
         return foregroundFull;
     }
 
+//    public static final ProgressBarStyle DEFAULT = new ProgressBarStyle(
+//            new Color(7, 99, 10),
+//            new Color(3, 51, 5),
+//            new Color(20, 212, 26)
+//    );
+
     public static final ProgressBarStyle DEFAULT = new ProgressBarStyle(
-            new Color(7, 99, 10),
-            new Color(3, 51, 5),
-            new Color(20, 212, 26)
+            new Color(6, 176, 37),
+            new Color(230, 230, 230),
+            new Color(188, 188, 188)
     );
 
 }

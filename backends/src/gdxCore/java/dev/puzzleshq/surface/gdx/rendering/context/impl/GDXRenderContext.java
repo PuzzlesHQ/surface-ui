@@ -2,11 +2,14 @@ package dev.puzzleshq.surface.gdx.rendering.context.impl;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import dev.puzzleshq.surface.api.module.AbstractSurfaceModule;
 import dev.puzzleshq.surface.api.module.ISurfaceModule;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 import dev.puzzleshq.surface.gdx.SurfaceUIGdx;
+
+import java.awt.*;
 
 public class GDXRenderContext implements IRenderContext {
 
@@ -52,6 +55,11 @@ public class GDXRenderContext implements IRenderContext {
     @Override
     public ISurfaceModule<?> getParentModule() {
         return SurfaceUIGdx.INSTANCE;
+    }
+
+    @Override
+    public void clearScreenWithColor(Color backgroundColor) {
+        ScreenUtils.clear(backgroundColor.getRed() / 255f, backgroundColor.getGreen() / 255f, backgroundColor.getBlue() / 255f, backgroundColor.getAlpha() / 255f);
     }
 
 }

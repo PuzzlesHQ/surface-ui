@@ -4,7 +4,7 @@ import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.module.ISurfaceModule;
 
 @NeedsDocumentation
-public class AbstractRenderContext implements IRenderContext {
+public abstract class AbstractRenderContext implements IRenderContext {
 
     protected final String name;
     protected final ISurfaceModule<?> module;

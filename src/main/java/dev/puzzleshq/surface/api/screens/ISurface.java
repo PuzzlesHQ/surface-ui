@@ -22,9 +22,15 @@ public interface ISurface<T extends IRenderContext> {
     void removeElement(String id);
     void clearElements();
 
+    IElement getActiveElement();
+    void setActiveElement(IElement element);
+
     default void postSwitchedTo(ISurface<?> currentSurface, ISurface<?> oldSurface) {};
     default void preSwitchedTo(ISurface<?> currentSurface, ISurface<?> oldSurface) {};
 
     default void preSwitchSurface(ISurface<?> currentSurface, ISurface<?> newSurface) {};
     default void postSwitchSurface(ISurface<?> currentSurface, ISurface<?> newSurface) {};
+
+    void setId(String id);
+    String getId();
 }

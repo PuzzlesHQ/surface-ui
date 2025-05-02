@@ -3,17 +3,27 @@ package dev.puzzleshq.surface;
 import dev.puzzleshq.surface.api.module.ISurfaceModule;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 import dev.puzzleshq.surface.api.screens.ISurface;
+import dev.puzzleshq.surface.util.SurfacePoint;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 public class SurfaceSupervisor {
 
-    private static final AtomicReference<ISurface<?>> superSurface;
+    private static final AtomicReference<ISurface> superSurface;
     private static final Map<String, ISurfaceModule<?>> moduleMap;
 
     private static final Map<String, ISurface<?>> surfaceMap;
+
+    public static final SurfacePoint MOUSE_POSITION = new SurfacePoint();
+    public static Function<SurfacePoint, SurfacePoint> POINT_UNPROJECTION_FUNCTION = null;
+
+    public static SurfacePoint unprojectPoint(SurfacePoint point) {
+        if (SurfaceSupervisor.POINT_UNPROJECTION_FUNCTION == null) return point;
+        return SurfaceSupervisor.POINT_UNPROJECTION_FUNCTION.apply(point);
+    }
 
     static {
         surfaceMap = new ConcurrentHashMap<>();
@@ -22,6 +32,7 @@ public class SurfaceSupervisor {
     }
 
     public static void register(String id, ISurface<?> surface) {
+        surface.setId(id);
         SurfaceSupervisor.surfaceMap.put(id, surface);
     }
 
@@ -41,19 +52,30 @@ public class SurfaceSupervisor {
         return moduleMap;
     }
 
-    public static ISurface<?> getSuperSurface() {
+    public static void renderCurrentSurface(IRenderContext context) {
+        ISurface surface = getCurrentSurface();
+        try {
+            surface.render(context);
+        } catch (Exception e) {
+            System.err.println("Error occurred while rendering surface \"" + surface.getId() + "\"");
+            e.printStackTrace();
+            Runtime.getRuntime().exit(-1);
+        }
+    }
+
+    public static ISurface getCurrentSurface() {
         return SurfaceSupervisor.superSurface.get();
     }
 
-    public static void setSuperSurface(String id) {
-        ISurface<?> surface = SurfaceSupervisor.getSurface(id);
+    public static void setSurface(String id) {
+        ISurface surface = SurfaceSupervisor.getSurface(id);
 
-        ISurface<?> oldSurface = SurfaceSupervisor.getSuperSurface();
-        oldSurface.preSwitchSurface(oldSurface, surface);
+        ISurface oldSurface = SurfaceSupervisor.getCurrentSurface();
+        if (oldSurface != null) oldSurface.preSwitchSurface(oldSurface, surface);
         surface.preSwitchedTo(surface, oldSurface);
         SurfaceSupervisor.superSurface.set(surface);
         surface.postSwitchedTo(surface, oldSurface);
-        oldSurface.postSwitchSurface(oldSurface, surface);
+        if (oldSurface != null) oldSurface.postSwitchSurface(oldSurface, surface);
     }
 
 }

@@ -11,11 +11,11 @@ public class SurfaceManager {
     public SurfaceManager() {}
 
     public ISurface getCurrentSurface() {
-        return SurfaceSupervisor.getSuperSurface();
+        return SurfaceSupervisor.getCurrentSurface();
     }
 
     public void swapSurface(String id) {
-        SurfaceSupervisor.setSuperSurface(id);
+        SurfaceSupervisor.setSurface(id);
     }
 
 }

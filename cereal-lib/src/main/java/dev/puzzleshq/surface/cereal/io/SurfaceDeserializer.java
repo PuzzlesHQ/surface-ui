@@ -24,14 +24,19 @@ public class SurfaceDeserializer {
             surface.setScript(handle.getFile(), handle.getString());
         }
 
+        JsonValue surfaceMeta = object.get("meta");
+        if (surfaceMeta != null && surfaceMeta.isObject()) SurfaceDeserializer.processMeta(surface, surfaceMeta.asObject());
+
         JsonValue elements = object.get("elements");
-        if (scriptPath != null) {
+        if (elements != null) {
             JsonArray elementsArray = elements.asArray();
             for (JsonValue value : elementsArray) {
-                JsonObject value1 = value.asObject();
                 if (value.isObject()) {
+                    JsonObject value1 = value.asObject();
                     String type = value1.get("type").asString();
-                    IElement element = CerealSupervisor.getElement(type);
+                    JsonValue meta = value1.get("meta");
+                    if (meta == null) meta = new JsonObject();
+                    IElement element = CerealSupervisor.getElement(type, meta.asObject());
                     surface.addElement(value1.get("id").asString(), element);
 
                     parseElement(element, value1);
@@ -43,6 +48,27 @@ public class SurfaceDeserializer {
 
         SurfaceSupervisor.register(object.get("id").asString(), surface);
         return surface;
+    }
+
+    private static JsonObject getJsonDataFromLocation(String string) {
+        RawAssetLoader.RawFileHandle handle = RawAssetLoader.getClassPathAsset(ResourceLocation.of(string));
+        if (handle == null) return null;
+        return JsonObject.readHjson(handle.getString()).asObject();
+    }
+
+    private static void processMeta(ScriptedSurface surface, JsonObject meta) {
+        JsonValue styles = meta.get("styles");
+        JsonArray array;
+        if (styles != null && styles.isArray()) {
+            array = styles.asArray();
+            for (JsonValue value : array) {
+                if (value.isString()) {
+                    JsonObject object = SurfaceDeserializer.getJsonDataFromLocation(value.asString());
+                    if (object != null) CerealSupervisor.registerStyle(object.get("id").asString(), object.get("meta").asObject());
+                }
+            }
+        }
+        surface.backgroundColor = CerealSupervisor.getColor(meta, "background-color");
     }
 
     private static void parseElement(IElement element, JsonObject obj) {

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dev.puzzlehq.surface.gdx.lwjgl3.SurfaceUILwjgl3Gdx;
+import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.cereal.io.SurfaceDeserializer;
 import dev.puzzleshq.surface.gdx.rendering.context.impl.GDXRenderContext;
@@ -27,6 +28,7 @@ public class MainApp extends ApplicationAdapter {
 
         this.batch = new SpriteBatch();
         this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/mod-loading-screen.json")).getString());
+        SurfaceSupervisor.setSurface(this.screenGDX.getId());
         Camera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.up.set(0.0F, -1.0F, 0.0F);
         camera.direction.set(0.0F, 0.0F, 1.0F);
@@ -56,9 +58,10 @@ public class MainApp extends ApplicationAdapter {
             this.resize(screenWidth, screenHeight);
         }
 
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+        ScreenUtils.clear(240 / 255f, 240 / 255f, 240 / 255f, 1f);
         this.batch.begin();
-        this.screenGDX.render(this.context);
+        SurfaceSupervisor.renderCurrentSurface(this.context);
+//        this.screenGDX.render(this.context);
         this.batch.end();
     }
 
