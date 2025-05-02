@@ -13,7 +13,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class AbstractGenericSurface<T extends IRenderContext> implements ISurface<T>, ISurfaceInputProcessor  {
 
     protected Map<String, IElement> elementMap;
+    protected IElement activeElement;
 
+    protected String id;
     protected boolean isInitialized;
 
     @Override
@@ -46,6 +48,16 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
     @Override
     public void clearElements() {
         this.elementMap.clear();
+    }
+
+    @Override
+    public IElement getActiveElement() {
+        return this.activeElement;
+    }
+
+    @Override
+    public void setActiveElement(IElement element) {
+        this.activeElement = element;
     }
 
     @Override
