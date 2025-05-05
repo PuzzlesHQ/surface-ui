@@ -3,7 +3,7 @@ package dev.puzzleshq.surface.api.element.impl;
 import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.element.styles.ButtonStyle;
-import dev.puzzleshq.surface.api.input.IGenericInputProcessor;
+import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
 import dev.puzzleshq.surface.api.input.event.mouse.MouseClickEvent;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.util.FiveInputFunction;

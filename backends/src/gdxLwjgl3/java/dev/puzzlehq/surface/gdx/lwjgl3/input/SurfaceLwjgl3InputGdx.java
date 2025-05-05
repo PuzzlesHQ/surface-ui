@@ -14,7 +14,7 @@ public class SurfaceLwjgl3InputGdx extends DefaultLwjgl3Input {
     }
 
     private static void registerCallbacks(long window) {
-        SurfaceCoreInputProcessor.SECONDARY_INPUT_PROCESSOR = new GDXInputAdapter();
+        SurfaceCoreInputProcessor.INTERNAL_GDX_PROCESSOR_INPUT = new GLFWCallbackInputAdapter();
 
         GLFW.glfwSetMouseButtonCallback(window, SurfaceCoreInputProcessor::onMouseClick);
         GLFW.glfwSetCursorPosCallback(window, SurfaceCoreInputProcessor::onCursorMove);
@@ -29,7 +29,7 @@ public class SurfaceLwjgl3InputGdx extends DefaultLwjgl3Input {
 
     @Override
     public void windowHandleChanged(long windowHandle) {
-        GDXInputAdapter adapter = (GDXInputAdapter) SurfaceCoreInputProcessor.SECONDARY_INPUT_PROCESSOR;
+        GLFWCallbackInputAdapter adapter = (GLFWCallbackInputAdapter) SurfaceCoreInputProcessor.INTERNAL_GDX_PROCESSOR_INPUT;
 
         adapter.setKeyCallback((GLFWKeyCallbackI) getField("keyCallback"));
         adapter.setCharCallback((GLFWCharCallbackI) getField("charCallback"));

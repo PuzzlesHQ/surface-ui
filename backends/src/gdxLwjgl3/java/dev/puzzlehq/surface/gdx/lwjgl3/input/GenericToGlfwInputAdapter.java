@@ -1,6 +1,6 @@
 package dev.puzzlehq.surface.gdx.lwjgl3.input;
 
-import dev.puzzleshq.surface.api.input.IGenericInputProcessor;
+import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
 import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
 import dev.puzzleshq.surface.api.input.event.keyboard.CharTypedEvent;
 import dev.puzzleshq.surface.api.input.event.keyboard.IKeyboardEvent;
@@ -10,11 +10,11 @@ import dev.puzzleshq.surface.api.input.event.mouse.MouseMoveEvent;
 import dev.puzzleshq.surface.api.input.event.mouse.MouseScrollEvent;
 import org.lwjgl.glfw.GLFW;
 
-public class GlfwToGenericAdapter implements ISurfaceInputProcessor {
+public class GenericToGlfwInputAdapter implements ISurfaceInputProcessor {
 
     IGenericInputProcessor processor;
 
-    public GlfwToGenericAdapter(IGenericInputProcessor processor) {
+    public GenericToGlfwInputAdapter(IGenericInputProcessor processor) {
         this.processor = processor;
     }
 

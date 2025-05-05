@@ -2,6 +2,7 @@ package dev.puzzleshq.surface.api.screens;
 
 import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.element.IElement;
+import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
 import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 
@@ -10,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @NeedsDocumentation
-public abstract class AbstractGenericSurface<T extends IRenderContext> implements ISurface<T>, ISurfaceInputProcessor  {
+public abstract class AbstractGenericSurface<T extends IRenderContext> implements ISurface<T>, ISurfaceInputProcessor, IGenericInputProcessor {
 
     protected Map<String, IElement> elementMap;
     protected IElement activeElement;

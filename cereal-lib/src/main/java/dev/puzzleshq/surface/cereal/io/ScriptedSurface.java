@@ -1,6 +1,9 @@
 package dev.puzzleshq.surface.cereal.io;
 
 import dev.puzzleshq.surface.api.element.IElement;
+import dev.puzzleshq.surface.api.input.IProcessor;
+import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
+import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
 import dev.puzzleshq.surface.api.input.SurfaceCoreInputProcessor;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
@@ -116,7 +119,8 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
     public void postSwitchedTo(ISurface<?> currentSurface, ISurface<?> oldSurface) {
         super.postSwitchedTo(currentSurface, oldSurface);
 
-        SurfaceCoreInputProcessor.setProcessor();
+        if (currentSurface instanceof IProcessor processor)
+            SurfaceCoreInputProcessor.setProcessor(processor);
 
         Object initFunction = scope.get("preSwitchedTo", scope);
         if (initFunction instanceof Function) {

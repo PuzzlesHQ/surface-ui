@@ -3,7 +3,8 @@ package dev.puzzlehq.surface.gdx.lwjgl3;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
-import dev.puzzlehq.surface.gdx.lwjgl3.input.GDXInputAdapter;
+import dev.puzzlehq.surface.gdx.lwjgl3.input.AutoGenericToGlfwInputAdapter;
+import dev.puzzlehq.surface.gdx.lwjgl3.input.GLFWCallbackInputAdapter;
 import dev.puzzlehq.surface.gdx.lwjgl3.input.SurfaceLwjgl3InputGdx;
 import dev.puzzleshq.surface.api.input.SurfaceCoreInputProcessor;
 
@@ -12,7 +13,8 @@ import java.lang.reflect.Field;
 public class SurfaceUILwjgl3Gdx {
 
     public static void addSurfaceInputCapabilities() {
-        SurfaceCoreInputProcessor.SECONDARY_INPUT_PROCESSOR = new GDXInputAdapter();
+        SurfaceCoreInputProcessor.INTERNAL_GDX_PROCESSOR_INPUT = new GLFWCallbackInputAdapter();
+        SurfaceCoreInputProcessor.INTERNAL_GENERIC_PROCESSOR = new AutoGenericToGlfwInputAdapter();
 
         Gdx.input = new SurfaceLwjgl3InputGdx(SurfaceUILwjgl3Gdx.getCurrentWindow());
     }

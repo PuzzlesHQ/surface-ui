@@ -3,7 +3,7 @@ package dev.puzzleshq.surface.api.input;
 import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 
 @NeedsDocumentation
-public interface ISurfaceInputProcessor {
+public interface ISurfaceInputProcessor extends IProcessor {
 
     default void onScroll(long window, double xOffset, double yOffset){}
     default void onCursorEnter(long window, boolean entered){}

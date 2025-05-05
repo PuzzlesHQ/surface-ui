@@ -3,7 +3,7 @@ package dev.puzzlehq.surface.gdx.lwjgl3.input;
 import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
 import org.lwjgl.glfw.*;
 
-public class GDXInputAdapter implements ISurfaceInputProcessor {
+public class GLFWCallbackInputAdapter implements ISurfaceInputProcessor {
 
     GLFWScrollCallbackI scrollCallback;
     GLFWCursorEnterCallbackI cursorEnterCallback;
