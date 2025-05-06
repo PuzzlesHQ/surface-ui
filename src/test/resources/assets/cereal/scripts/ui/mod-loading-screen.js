@@ -26,7 +26,6 @@ function init(surface) {
 function onRender(ctx) {
     prog = prog + 1;
     ramUsageBar.setProgress(prog);
-    console.error("Look mum, Im rendering. " + prog);
 
 //   if (testButton != null) {
 //       testButton.setClickEvent(Java.toConsumer((btn) => {

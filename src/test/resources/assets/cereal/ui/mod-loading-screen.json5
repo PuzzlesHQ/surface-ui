@@ -13,7 +13,8 @@
         "image": "cereal:textures/puzzle-loader-icon.png",
         "frequency": 0.2,
         "max-scale": 1.1,
-        "min-scale": 1
+        "min-scale": 1,
+        "tint": "HEISENBERG"
       },
       "anchors": ["right", "bottom"],
       "pos": [-5, -5],

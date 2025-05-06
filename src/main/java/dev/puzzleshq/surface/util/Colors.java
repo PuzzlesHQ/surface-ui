@@ -1687,6 +1687,7 @@ public class Colors {
     public static final Color LIME = new Color(0, 255, 0);
     public static final Color OLIVE_DRAB = new Color(107, 142, 35);
     public static final Color OLIVE = new Color(128, 128, 0);
+    public static final Color HEISENBERG = new Color(31, 96, 50);
     public static final Color CYAN = new Color(0, 255, 255);
     public static final Color DEEP_SKY_BLUE = new Color(0, 191, 255);
     public static final Color ROYAL_BLUE = new Color(65, 105, 225);
@@ -1709,7 +1710,7 @@ public class Colors {
             Field colorField = Colors.class.getField(name.toUpperCase().replaceAll("-", "_"));
             return (Color) colorField.get(name);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            System.err.println("Color \"" + name + "\", if you wish to have this color, feel free to add it. ");
+            System.err.println("Color \"" + name + "\" not found, if you wish to have this color, feel free to add it at https://github.com/PuzzlesHQ/surface-ui/blob/main/src/main/java/dev/puzzleshq/surface/util/Colors.java");
             return Colors.BABYSHIT_GREEN;
         }
     }

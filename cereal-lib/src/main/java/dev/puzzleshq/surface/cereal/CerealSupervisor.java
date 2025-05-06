@@ -116,9 +116,9 @@ public class CerealSupervisor {
             return new Color(array.get(0).asInt(), array.get(1).asInt(), array.get(2).asInt());
         }
         if (value.isString()) {
-            Color color = Colors.getColor(value.asString());
-            if (color != null) return color;
-            return Color.decode(value.asString().toUpperCase());
+            if (value.asString().startsWith("#"))
+                return Color.decode(value.asString().toUpperCase());
+            return Colors.getColor(value.asString());
         }
         return null;
     }
