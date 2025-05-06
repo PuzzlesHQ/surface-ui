@@ -88,11 +88,11 @@ public abstract class AbstractElement implements IElement {
         return height;
     }
 
-    public int getTotalWidth() {
+    public float getTotalWidth() {
         return width;
     }
 
-    public int getTotalHeight() {
+    public float getTotalHeight() {
         return height;
     }
 
@@ -126,7 +126,7 @@ public abstract class AbstractElement implements IElement {
         return module.getElementRenderer(this.getClass());
     }
 
-    public static float getRealX(final int width, final AbstractElement element) {
+    public static float getRealX(final float width, final AbstractElement element) {
         switch (element.anchorX) {
             case NONE:
                 return element.x;
@@ -141,7 +141,7 @@ public abstract class AbstractElement implements IElement {
         }
     }
 
-    public static float getRealY(final int height, AbstractElement element) {
+    public static float getRealY(final float height, AbstractElement element) {
         switch (element.anchorY) {
             case NONE:
                 return element.y;
@@ -149,7 +149,7 @@ public abstract class AbstractElement implements IElement {
                 return element.y - (height * .5f);
             case BOTTOM:
                 return element.y + (height * .5f) - (element.getTotalHeight());
-            case CENTRE:
+            case CENTER:
                 return element.y - (element.getTotalHeight() * .5f);
             default:
                 throw new IllegalArgumentException();

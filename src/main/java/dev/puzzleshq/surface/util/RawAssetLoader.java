@@ -1,4 +1,4 @@
-package dev.puzzleshq.util;
+package dev.puzzleshq.surface.util;
 
 import java.io.File;
 import java.io.IOException;

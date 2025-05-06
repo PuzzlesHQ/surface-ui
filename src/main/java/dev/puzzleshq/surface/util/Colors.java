@@ -1,9 +1,7 @@
-package dev.puzzleshq.surface.cereal.color;
+package dev.puzzleshq.surface.util;
 
 import java.awt.*;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Map;
 
 public class Colors {
 
@@ -90,6 +88,7 @@ public class Colors {
     public static final Color JELLY_BEAN = new Color(218, 97, 78);
     public static final Color LYCHEE = new Color(220, 83, 73);
     public static final Color GOOGLE_CHROME_RED = new Color(222, 82, 70);
+    public static final Color RED_BULL_RED = new Color(227, 1, 24);
     public static final Color DEEP_CARMINE_PINK = new Color(239, 48, 56);
     public static final Color CINNABAR = new Color(227, 66, 52);
     public static final Color STRAWBERRY_DAIQUIRI = new Color(217, 70, 62);
@@ -147,6 +146,7 @@ public class Colors {
     public static final Color RED_COLA = new Color(182, 32, 32);
     public static final Color ROSSO_CORSA = new Color(212, 0, 0);
     public static final Color FIREBRICK = new Color(178, 34, 34);
+    public static final Color FERARRI = new Color(196, 21, 28);
     public static final Color VERIZON_RED = new Color(205, 4, 11);
     public static final Color METALLIC_RED = new Color(166, 44, 43);
     public static final Color VENETIAN_RED = new Color(200, 8, 21);
@@ -534,6 +534,7 @@ public class Colors {
     public static final Color EARTHTONE = new Color(93, 58, 26);
     public static final Color PHILIPPINE_BRONZE = new Color(110, 58, 7);
     public static final Color CAFE_NOIR = new Color(75, 54, 33);
+    public static final Color SHIT_BROWN = new Color(122, 89, 1);
     public static final Color VIOLIN_BROWN = new Color(103, 68, 3);
     public static final Color JACKO_BEAN = new Color(65, 54, 40);
     public static final Color SENSAICHA_THOUSAND_YEAR_OLD_BROWN = new Color(59, 52, 41);
@@ -740,6 +741,7 @@ public class Colors {
     public static final Color SPRING_BUD = new Color(167, 252, 0);
     public static final Color YANAGIZOME_WILLOW_DYE = new Color(140, 158, 94);
     public static final Color MOSS_GREEN = new Color(138, 154, 91);
+    public static final Color VOMIT = new Color(162, 164, 21);
     public static final Color BITTER_LEMON = new Color(202, 224, 13);
     public static final Color POMELO = new Color(150, 165, 60);
     public static final Color VIVID_LIME_GREEN = new Color(166, 214, 8);
@@ -872,6 +874,7 @@ public class Colors {
     public static final Color PAKISTAN_GREEN = new Color(0, 102, 0);
     public static final Color AIMIRUCHA_INDIGO_CODIUM_FRAGILE_SEAWEED_BROWN = new Color(46, 55, 46);
     public static final Color LINCOLN_GREEN = new Color(25, 89, 5);
+    public static final Color BABYSHIT_GREEN = new Color(156, 143, 58);
     public static final Color BLACK_LEATHER_JACKET = new Color(37, 53, 41);
     public static final Color PINE_TREE = new Color(42, 47, 35);
     public static final Color MINT_CREAM = new Color(245, 255, 250);
@@ -988,6 +991,7 @@ public class Colors {
     public static final Color PICTON_BLUE = new Color(69, 177, 232);
     public static final Color BAYSIDE = new Color(95, 201, 191);
     public static final Color TURQUOISE = new Color(64, 224, 208);
+    public static final Color MERCADES_BLUE = new Color(0, 161, 155);
     public static final Color SEA_SERPENT = new Color(75, 199, 207);
     public static final Color MEDIUM_TURQUOISE = new Color(72, 209, 204);
     public static final Color CRYSTAL_BLUE = new Color(104, 160, 176);
@@ -1014,6 +1018,7 @@ public class Colors {
     public static final Color MAXIMUM_BLUE_GREEN = new Color(48, 191, 191);
     public static final Color AUROMETALSAURUS = new Color(110, 127, 128);
     public static final Color BALL_BLUE = new Color(33, 171, 205);
+    public static final Color RED_BULL_BLUE = new Color(35, 50, 106);
     public static final Color VIVID_CERULEAN = new Color(0, 170, 238);
     public static final Color MICROSOFT_BLUE = new Color(0, 162, 237);
     public static final Color PROCESS_CYAN = new Color(0, 183, 235);
@@ -1048,6 +1053,7 @@ public class Colors {
     public static final Color CELADON_BLUE = new Color(0, 123, 167);
     public static final Color PERSIAN_GREEN = new Color(0, 166, 147);
     public static final Color CG_BLUE = new Color(0, 122, 165);
+    public static final Color ASTRON_MARTIN = new Color(3, 122, 104);
     public static final Color SABIONANDO_RUSTY_STORAGE = new Color(69, 88, 89);
     public static final Color HANAASAGI_LIGHT_BLUE_FLOWER = new Color(29, 105, 124);
     public static final Color VIRIDIAN_GREEN = new Color(0, 150, 152);
@@ -1350,6 +1356,7 @@ public class Colors {
     public static final Color LIGHT_DEEP_PINK = new Color(255, 92, 205);
     public static final Color PASTEL_PURPLE = new Color(179, 158, 181);
     public static final Color PURPLE_PIZZAZZ = new Color(254, 78, 218);
+    public static final Color FUCKING_PINK = new Color(227, 36, 157);
     public static final Color ORCHID = new Color(218, 112, 214);
     public static final Color DEEP_MAUVE = new Color(212, 115, 212);
     public static final Color LILAC_LUSTER = new Color(174, 152, 170);
@@ -1685,11 +1692,13 @@ public class Colors {
     public static final Color ROYAL_BLUE = new Color(65, 105, 225);
     public static final Color NAVY = new Color(0, 0, 128);
     public static final Color BURLY_WOOD = new Color(222, 184, 135);
+    public static final Color PAPAYA = new Color(255, 128, 0);
     public static final Color CHOCOLATE = new Color(210, 105, 30);
     public static final Color SIENNA = new Color(160, 82, 45);
     public static final Color MAROON = new Color(128, 0, 0);
     public static final Color HONEY_DEW = new Color(240, 255, 240);
     public static final Color WHITE_SMOKE = new Color(245, 245, 245);
+    public static final Color MERCADES_SILVER = new Color(200, 204, 206);
     public static final Color SEA_SHELL = new Color(255, 245, 238);
     public static final Color SILVER = new Color(192, 192, 192);
     public static final Color DARK_GRAY = new Color(169, 169, 169);
@@ -1700,7 +1709,8 @@ public class Colors {
             Field colorField = Colors.class.getField(name.toUpperCase().replaceAll("-", "_"));
             return (Color) colorField.get(name);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            return null;
+            System.err.println("Color \"" + name + "\", if you wish to have this color, feel free to add it. ");
+            return Colors.BABYSHIT_GREEN;
         }
     }
 

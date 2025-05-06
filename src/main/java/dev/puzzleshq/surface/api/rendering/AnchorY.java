@@ -7,5 +7,5 @@ public enum AnchorY {
     NONE,
     TOP,
     BOTTOM,
-    CENTRE
+    CENTER
 }

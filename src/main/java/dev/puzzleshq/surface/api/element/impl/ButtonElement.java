@@ -72,12 +72,12 @@ public class ButtonElement extends AbstractElement implements IGenericInputProce
     }
 
     @Override
-    public int getTotalWidth() {
+    public float getTotalWidth() {
         return style.getOutlineThickness() + this.width;
     }
 
     @Override
-    public int getTotalHeight() {
+    public float getTotalHeight() {
         return style.getOutlineThickness() + this.height;
     }
 

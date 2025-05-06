@@ -2,13 +2,15 @@ package dev.puzzleshq.surface.cereal;
 
 import dev.puzzleshq.surface.api.element.IElement;
 import dev.puzzleshq.surface.api.element.impl.ButtonElement;
+import dev.puzzleshq.surface.api.element.impl.ImageElement;
 import dev.puzzleshq.surface.api.element.impl.ProgressBarElement;
+import dev.puzzleshq.surface.api.element.impl.PulsingImageElement;
 import dev.puzzleshq.surface.api.element.styles.ButtonStyle;
 import dev.puzzleshq.surface.api.element.styles.ProgressBarStyle;
-import dev.puzzleshq.surface.cereal.color.Colors;
+import dev.puzzleshq.surface.util.Colors;
 import dev.puzzleshq.surface.cereal.js.hidden.ClassFinder;
-import dev.puzzleshq.util.RawAssetLoader;
-import dev.puzzleshq.util.ResourceLocation;
+import dev.puzzleshq.surface.util.RawAssetLoader;
+import dev.puzzleshq.surface.util.ResourceLocation;
 import org.hjson.JsonArray;
 import org.hjson.JsonObject;
 import org.hjson.JsonValue;
@@ -37,6 +39,26 @@ public class CerealSupervisor {
     }
 
     private static void init() {
+        CerealSupervisor.register("cereal:pulsing-image", (o) -> {
+            PulsingImageElement element = new PulsingImageElement();
+            element.setTexture(ResourceLocation.of(o.getString("image", "cereal:textures/missing-no.png")));
+            element.setTint(CerealSupervisor.getColorOrDefault(o, "tint", Color.WHITE));
+            element.setRotation(o.getInt("rotation", 0));
+            element.setMaxScale(o.getFloat("max-scale", 1.1f));
+            element.setMinScale(o.getFloat("min-scale", .8f));
+            element.setFrequency(o.getFloat("frequency", 1));
+            return element;
+        });
+
+        CerealSupervisor.register("cereal:image", (o) -> {
+            ImageElement element = new ImageElement();
+            element.setTexture(ResourceLocation.of(o.getString("image", "cereal:textures/missing-no.png")));
+            element.setTint(CerealSupervisor.getColorOrDefault(o, "tint", Color.WHITE));
+            element.setRotation(o.getInt("rotation", 0));
+            element.setScale(o.getFloat("scale", 1));
+            return element;
+        });
+
         CerealSupervisor.register("cereal:progress-bar", (o) -> {
             JsonValue styleValue = o.get("style");
             JsonObject object = null;

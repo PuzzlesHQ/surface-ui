@@ -62,7 +62,12 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
     }
 
     @Override
-    public void update(float delta) {}
+    public void update(float delta) {
+        for (IElement e : getElementCollection()) {
+//            System.out.println(delta);
+            e.update(this, delta);
+        }
+    }
 
     @Override
     public Collection<IElement> getElementCollection() {

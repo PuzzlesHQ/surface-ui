@@ -1,0 +1,7 @@
+{
+  "id": "common-table-ruleset",
+  "cell-margin-x": [5, 5],
+  "cell-margin-y": [5, 5],
+  "cell-max-size": [100, 100],
+  "cell-min-size": [40, 40]
+}

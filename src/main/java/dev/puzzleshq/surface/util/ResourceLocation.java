@@ -1,4 +1,4 @@
-package dev.puzzleshq.util;
+package dev.puzzleshq.surface.util;
 
 import java.util.regex.Pattern;
 
@@ -45,6 +45,11 @@ public class ResourceLocation {
             throw new RuntimeException("Invalid ResourceLocation Format \"" + id + "\", must be formatted like \"namespace:path\"");
 
         return new ResourceLocation(parts[0], parts[1]);
+    }
+
+    @Override
+    public int hashCode() {
+        return hash;
     }
 
     /**

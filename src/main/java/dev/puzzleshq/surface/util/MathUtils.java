@@ -13,4 +13,12 @@ public class MathUtils {
         return Math.max(min, Math.min(max, value));
     }
 
+    public static float lerp (float fromValue, float toValue, float progress) {
+        return fromValue + (toValue - fromValue) * progress;
+    }
+
+    public static double lerp(double fromValue, double toValue, double progress) {
+        return fromValue + (toValue - fromValue) * progress;
+    }
+
 }

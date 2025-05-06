@@ -43,12 +43,12 @@ public class ProgressBarElement extends AbstractElement {
     }
 
     @Override
-    public int getTotalWidth() {
+    public float getTotalWidth() {
         return this.width + 4;
     }
 
     @Override
-    public int getTotalHeight() {
+    public float getTotalHeight() {
         return this.height + 4;
     }
 

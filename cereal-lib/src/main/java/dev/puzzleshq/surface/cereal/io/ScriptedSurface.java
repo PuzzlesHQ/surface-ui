@@ -93,6 +93,7 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
         if (this.onUpdate != null && this.onUpdate instanceof Function) {
             Context.call(ContextFactory.getGlobal(), (Function) this.onUpdate, scope, scope, new Object[]{ delta });
         }
+        super.update(delta);
     }
 
     @Override

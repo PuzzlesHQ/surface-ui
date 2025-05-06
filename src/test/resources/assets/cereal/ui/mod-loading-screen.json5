@@ -7,12 +7,25 @@
   },
   "elements": [
     {
+      "type": "cereal:pulsing-image",
+      "id": "puzzle-logo",
+      "meta": {
+        "image": "cereal:textures/puzzle-loader-icon.png",
+        "frequency": 0.2,
+        "max-scale": 1.1,
+        "min-scale": 1
+      },
+      "anchors": ["right", "bottom"],
+      "pos": [-5, -5],
+      "size": [64, 64]
+    },
+    {
       "type": "cereal:progress-bar",
       "id": "ram-usage-bar",
       "meta": {
         "style": {
           "foreground-full": "#ababab",
-          "foreground-empty":  "#3d3d3d",
+          "foreground-empty": "#3d3d3d",
           "background": "#ffffff"
         }
       },

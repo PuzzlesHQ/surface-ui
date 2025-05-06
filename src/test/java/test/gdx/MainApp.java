@@ -12,8 +12,8 @@ import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.cereal.io.SurfaceDeserializer;
 import dev.puzzleshq.surface.gdx.rendering.context.impl.GDXRenderContext;
-import dev.puzzleshq.util.RawAssetLoader;
-import dev.puzzleshq.util.ResourceLocation;
+import dev.puzzleshq.surface.util.RawAssetLoader;
+import dev.puzzleshq.surface.util.ResourceLocation;
 
 public class MainApp extends ApplicationAdapter {
     private SpriteBatch batch;
@@ -27,7 +27,7 @@ public class MainApp extends ApplicationAdapter {
         SurfaceUILwjgl3Gdx.addSurfaceInputCapabilities();
 
         this.batch = new SpriteBatch();
-        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/mod-loading-screen.json")).getString());
+        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/mod-loading-screen.json5")).getString());
         SurfaceSupervisor.setSurface(this.screenGDX.getId());
         Camera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.up.set(0.0F, -1.0F, 0.0F);

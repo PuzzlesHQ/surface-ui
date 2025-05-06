@@ -2,6 +2,7 @@ package dev.puzzleshq.surface;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
 
 public class SurfaceUpdateSupervisor implements Runnable {
 
@@ -23,12 +24,25 @@ public class SurfaceUpdateSupervisor implements Runnable {
     public static void start() {
         EVENT_THREAD.start();
     }
+    private static float delta;
 
     @Override
     public void run() {
-        while (!SurfaceUpdateSupervisor.RUNNABLE_QUEUE.isEmpty()) {
-            Runnable runnable = SurfaceUpdateSupervisor.RUNNABLE_QUEUE.poll();
-            runnable.run();
+        while (true) {
+            if (SurfaceSupervisor.getCurrentSurface() == null) continue;
+            long start = System.nanoTime();
+            SurfaceSupervisor.getCurrentSurface().update(delta);
+
+//            try {
+//                Thread.sleep(1);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+            delta = (float) ((System.nanoTime() - start) * 1e-9);
         }
+//        while (!SurfaceUpdateSupervisor.RUNNABLE_QUEUE.isEmpty()) {
+//            Runnable runnable = SurfaceUpdateSupervisor.RUNNABLE_QUEUE.poll();
+//            runnable.run();
+//        }
     }
 }

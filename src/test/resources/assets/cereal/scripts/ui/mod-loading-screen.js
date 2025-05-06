@@ -28,10 +28,12 @@ function onRender(ctx) {
     ramUsageBar.setProgress(prog);
     console.error("Look mum, Im rendering. " + prog);
 
-            testButton.setClickEvent(Java.toConsumer((btn) => {
-                testButton.getClickEvent().apply(btn);
-                Sysout.println("click");
-            }));
+//   if (testButton != null) {
+//       testButton.setClickEvent(Java.toConsumer((btn) => {
+//           testButton.getClickEvent().apply(btn);
+//           Sysout.println("click");
+//       }));
+//   }
 }
 
 // On Switch To

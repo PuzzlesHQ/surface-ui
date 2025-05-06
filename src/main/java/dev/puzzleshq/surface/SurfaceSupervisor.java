@@ -26,6 +26,8 @@ public class SurfaceSupervisor {
     }
 
     static {
+        SurfaceUpdateSupervisor.start();
+
         surfaceMap = new ConcurrentHashMap<>();
         superSurface = new AtomicReference<>(null);
         moduleMap = new ConcurrentHashMap<>();

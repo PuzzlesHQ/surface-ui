@@ -5,6 +5,12 @@ plugins {
 group = 'dev.puzzleshq'
 version = '1.0.0'
 
+sourceSets {
+    json
+    core
+
+}
+
 repositories {
     mavenCentral()
 }
