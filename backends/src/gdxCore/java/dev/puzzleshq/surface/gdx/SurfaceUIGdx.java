@@ -2,6 +2,7 @@ package dev.puzzleshq.surface.gdx;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.element.impl.ButtonElement;
 import dev.puzzleshq.surface.api.element.impl.ImageElement;
 import dev.puzzleshq.surface.api.element.impl.ProgressBarElement;
@@ -13,6 +14,7 @@ import dev.puzzleshq.surface.gdx.rendering.element.impl.ButtonElementRenderer;
 import dev.puzzleshq.surface.gdx.rendering.element.impl.ImageElementRenderer;
 import dev.puzzleshq.surface.gdx.rendering.element.impl.ProgressBarElementRenderer;
 import dev.puzzleshq.surface.gdx.rendering.element.impl.PulseImageElementRenderer;
+import dev.puzzleshq.surface.util.SurfacePoint;
 
 import java.awt.*;
 

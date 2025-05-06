@@ -126,14 +126,14 @@ public abstract class AbstractElement implements IElement {
         return module.getElementRenderer(this.getClass());
     }
 
-    public static float getRealX(final float width, final AbstractElement element) {
+    public static float getRealX(final float screenWidth, final AbstractElement element) {
         switch (element.anchorX) {
             case NONE:
                 return element.x;
             case RIGHT:
-                return element.x + (width * .5f) - (element.getTotalWidth());
+                return element.x + (screenWidth * .5f) - (element.getTotalWidth());
             case LEFT:
-                return element.x - (width * .5f);
+                return element.x - (screenWidth * .5f);
             case CENTER:
                 return element.x - (element.getTotalWidth() * .5f);
             default:
@@ -141,14 +141,14 @@ public abstract class AbstractElement implements IElement {
         }
     }
 
-    public static float getRealY(final float height, AbstractElement element) {
+    public static float getRealY(final float screenHeight, AbstractElement element) {
         switch (element.anchorY) {
             case NONE:
                 return element.y;
             case TOP:
-                return element.y - (height * .5f);
+                return element.y - (screenHeight * .5f);
             case BOTTOM:
-                return element.y + (height * .5f) - (element.getTotalHeight());
+                return element.y + (screenHeight * .5f) - (element.getTotalHeight());
             case CENTER:
                 return element.y - (element.getTotalHeight() * .5f);
             default:

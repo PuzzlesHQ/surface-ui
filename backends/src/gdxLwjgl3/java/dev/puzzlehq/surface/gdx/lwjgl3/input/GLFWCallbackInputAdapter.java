@@ -1,5 +1,6 @@
 package dev.puzzlehq.surface.gdx.lwjgl3.input;
 
+import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
 import org.lwjgl.glfw.*;
 
@@ -53,6 +54,9 @@ public class GLFWCallbackInputAdapter implements ISurfaceInputProcessor {
 
     @Override
     public void onCursorMove(long window, double x, double y) {
+        SurfaceSupervisor.MOUSE_POSITION.x = (float) x;
+        SurfaceSupervisor.MOUSE_POSITION.y = (float) y;
+
         if (cursorPosCallback != null)
             cursorPosCallback.invoke(window, x, y);
     }

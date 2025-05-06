@@ -56,8 +56,9 @@ public class SurfaceSupervisor {
 
     public static void renderCurrentSurface(IRenderContext context) {
         ISurface surface = getCurrentSurface();
+        surface.setContext(context);
         try {
-            surface.render(context);
+            surface.render();
         } catch (Exception e) {
             System.err.println("Error occurred while rendering surface \"" + surface.getId() + "\"");
             e.printStackTrace();

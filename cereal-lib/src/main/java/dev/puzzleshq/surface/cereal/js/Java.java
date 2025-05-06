@@ -2,6 +2,13 @@ package dev.puzzleshq.surface.cereal.js;
 
 import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.screens.ISurface;
+import dev.puzzleshq.surface.cereal.io.ScriptedSurface;
+import org.mozilla.javascript.ArrowFunction;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.Function;
+
+import java.util.function.Consumer;
 
 @JsIncluded
 public class Java {

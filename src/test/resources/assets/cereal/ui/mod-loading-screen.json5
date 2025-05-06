@@ -13,8 +13,7 @@
         "image": "cereal:textures/puzzle-loader-icon.png",
         "frequency": 0.2,
         "max-scale": 1.1,
-        "min-scale": 1,
-        "tint": "HEISENBERG"
+        "min-scale": 1
       },
       "anchors": ["right", "bottom"],
       "pos": [-5, -5],
@@ -69,7 +68,13 @@
       "id": "button",
       "meta": {
         "style": {
-          "outline-thickness": 5
+          "outline-thickness": 5,
+          "outline-color": "spicy-skin",
+          "background-color": "spicy-eye",
+          "outline-hover-color": "crab-skin",
+          "background-hover-color": "crab-eye",
+          "outline-press-color": "zombii-skin",
+          "background-press-color": "zombii-eye"
         }
       },
       "anchors": ["center", "top"],

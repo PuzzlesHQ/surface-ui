@@ -86,14 +86,14 @@ public class CerealSupervisor {
             if (styleValue != null && styleValue.isString()) object = CerealSupervisor.getJsonDataFromLocation(styleValue.asString());
             ButtonStyle style = ButtonStyle.DEFAULT;
             if (object != null) {
-                Color background = CerealSupervisor.getColorOrDefault(object, "background", ButtonStyle.DEFAULT.getDefaultBackground());
-                Color outline = CerealSupervisor.getColorOrDefault(object, "outline", ButtonStyle.DEFAULT.getDefaultOutline());
+                Color background = CerealSupervisor.getColorOrDefault(object, "background-color", ButtonStyle.DEFAULT.getDefaultBackground());
+                Color outline = CerealSupervisor.getColorOrDefault(object, "outline-color", ButtonStyle.DEFAULT.getDefaultOutline());
 
-                Color background_hover = CerealSupervisor.getColorOrDefault(object, "background-hover", background);
-                Color outline_hover = CerealSupervisor.getColorOrDefault(object, "outline-hover", outline);
+                Color background_hover = CerealSupervisor.getColorOrDefault(object, "background-hover-color", ButtonStyle.DEFAULT.getHoverBackground());
+                Color outline_hover = CerealSupervisor.getColorOrDefault(object, "outline-hover-color", ButtonStyle.DEFAULT.getHoverOutline());
 
-                Color background_press = CerealSupervisor.getColorOrDefault(object, "background-press", background);
-                Color outline_press = CerealSupervisor.getColorOrDefault(object, "outline-press", outline);
+                Color background_press = CerealSupervisor.getColorOrDefault(object, "background-press-color", ButtonStyle.DEFAULT.getPressBackground());
+                Color outline_press = CerealSupervisor.getColorOrDefault(object, "outline-press-color", ButtonStyle.DEFAULT.getPressOutline());
 
                 int outline_thickness = object.getInt("outline-thickness", ButtonStyle.DEFAULT.getOutlineThickness());
 

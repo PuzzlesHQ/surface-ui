@@ -13,6 +13,7 @@ public class ClassFinder implements ClassShutter {
         PACKAGE_ALLOW_LIST.add("dev.puzzleshq.surface.");
         PACKAGE_ALLOW_LIST.add("java.io.PrintStream");
         PACKAGE_ALLOW_LIST.add("java.lang.");
+        PACKAGE_ALLOW_LIST.add("jdk.proxy");
     }
 
     @Override

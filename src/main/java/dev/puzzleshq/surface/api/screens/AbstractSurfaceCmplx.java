@@ -2,8 +2,13 @@ package dev.puzzleshq.surface.api.screens;
 
 import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.element.IElement;
-import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
 import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
+import dev.puzzleshq.surface.api.input.event.keyboard.CharTypedEvent;
+import dev.puzzleshq.surface.api.input.event.keyboard.KeyPressEvent;
+import dev.puzzleshq.surface.api.input.event.mouse.MouseClickEvent;
+import dev.puzzleshq.surface.api.input.event.mouse.MouseMoveEvent;
+import dev.puzzleshq.surface.api.input.event.mouse.MouseScrollEvent;
+import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 
 import java.util.Collection;
@@ -11,68 +16,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @NeedsDocumentation
-public abstract class AbstractGenericSurface<T extends IRenderContext> implements ISurface<T>, ISurfaceInputProcessor, IGenericInputProcessor {
-
-    protected Map<String, IElement> elementMap;
-    protected IElement activeElement;
-
-    protected String id;
-    protected boolean isInitialized;
-
-    @Override
-    public void init() {
-        elementMap = new ConcurrentHashMap<>();
-
-        isInitialized = true;
-    }
-
-    @Override
-    public boolean isInitialized() {
-        return isInitialized;
-    }
-
-    @Override
-    public void addElement(String id, IElement element) {
-        this.elementMap.put(id, element);
-    }
-
-    @Override
-    public IElement getElement(String id) {
-        return this.elementMap.get(id);
-    }
-
-    @Override
-    public void removeElement(String id) {
-        this.elementMap.remove(id);
-    }
-
-    @Override
-    public void clearElements() {
-        this.elementMap.clear();
-    }
-
-    @Override
-    public IElement getActiveElement() {
-        return this.activeElement;
-    }
-
-    @Override
-    public void setActiveElement(IElement element) {
-        this.activeElement = element;
-    }
-
-    @Override
-    public void update(float delta) {
-        for (IElement e : getElementCollection()) {
-//            System.out.println(delta);
-            e.update(this, delta);
-        }
-    }
-
-    @Override
-    public Collection<IElement> getElementCollection() {
-        return elementMap.values();
-    }
+public abstract class AbstractSurfaceCmplx<T extends IRenderContext> implements ISurface<T>, ISurfaceInputProcessor{
 
     @Override
     public void onCharTyped(long window, int codepoint) {
@@ -144,15 +88,13 @@ public abstract class AbstractGenericSurface<T extends IRenderContext> implement
         }
     }
 
-    @Override
-    public String getId() {
-        return id;
+    public void onScroll(MouseScrollEvent e) {
+        for (IElement element : getElementCollection()) {
+            if (element instanceof ISurfaceInputProcessor) {
+                IGenericInputProcessor proc = (IGenericInputProcessor) element;
+                proc.onScroll(e);
+            }
+        }
     }
 
-    @Override
-    public void setId(String id) {
-        if (this.id != null) return;
-
-        this.id = id;
-    }
 }

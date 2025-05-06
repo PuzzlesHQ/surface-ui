@@ -1,6 +1,7 @@
 var thisSurface;
 var ramUsageBar;
 var prog = 0;
+var rotation = 0;
 
 function init(surface) {
     thisSurface = surface;
@@ -14,19 +15,23 @@ function init(surface) {
     ramUsageBar = thisSurface.getElement("ram-usage-bar");
     ramUsageBar.setMax(ramRange);
 
+
+
     const testButton = thisSurface.getElement("button");
     if (testButton != null) {
-//        testButton.setClickEvent(Java.toConsumer((btn) => {
-//            testButton.getClickEvent().apply(btn);
-//            Sysout.println("click");
-//        }));
+        testButton.setClickEvent((btn) => {
+//            testButton.getClickEvent().accept(btn);
+            prog += 1;
+            console.log("click");
+        });
     }
 }
 
 function onRender(ctx) {
-    prog = prog + 1;
     ramUsageBar.setProgress(prog);
 
+    const logo = thisSurface.getElement("puzzle-logo");
+    logo.setRotation(prog);
 //   if (testButton != null) {
 //       testButton.setClickEvent(Java.toConsumer((btn) => {
 //           testButton.getClickEvent().apply(btn);

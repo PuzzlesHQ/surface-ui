@@ -1,5 +1,7 @@
 package dev.puzzleshq.surface;
 
+import dev.puzzleshq.surface.api.screens.ISurface;
+
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
@@ -29,9 +31,10 @@ public class SurfaceUpdateSupervisor implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (SurfaceSupervisor.getCurrentSurface() == null) continue;
+            ISurface surface = SurfaceSupervisor.getCurrentSurface();
+            if (surface == null || surface.getContext() == null) continue;
             long start = System.nanoTime();
-            SurfaceSupervisor.getCurrentSurface().update(delta);
+            surface.update(delta);
 
 //            try {
 //                Thread.sleep(1);

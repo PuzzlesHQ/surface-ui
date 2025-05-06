@@ -2,12 +2,10 @@ package dev.puzzleshq.surface.cereal.io;
 
 import dev.puzzleshq.surface.api.element.IElement;
 import dev.puzzleshq.surface.api.input.IProcessor;
-import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
-import dev.puzzleshq.surface.api.input.ISurfaceInputProcessor;
 import dev.puzzleshq.surface.api.input.SurfaceCoreInputProcessor;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
-import dev.puzzleshq.surface.api.screens.AbstractGenericSurface;
+import dev.puzzleshq.surface.api.screens.AbstractSurfaceGeneric;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.cereal.CerealSupervisor;
 import dev.puzzleshq.surface.cereal.js.JSConsole;
@@ -19,7 +17,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.StringReader;
 
-public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
+public class ScriptedSurface extends AbstractSurfaceGeneric<IRenderContext> {
 
     Context surfaceContext;
 
@@ -72,7 +70,7 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
     }
 
     @Override
-    public void render(IRenderContext context) {
+    public void render() {
         if (backgroundColor != null)
             context.clearScreenWithColor(backgroundColor);
         if (this.onRender != null && this.onRender instanceof Function) {
@@ -123,7 +121,7 @@ public class ScriptedSurface extends AbstractGenericSurface<IRenderContext> {
         if (currentSurface instanceof IProcessor processor)
             SurfaceCoreInputProcessor.setProcessor(processor);
 
-        Object initFunction = scope.get("preSwitchedTo", scope);
+        Object initFunction = scope.get("postSwitchedTo", scope);
         if (initFunction instanceof Function) {
             Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, oldSurface });
         }

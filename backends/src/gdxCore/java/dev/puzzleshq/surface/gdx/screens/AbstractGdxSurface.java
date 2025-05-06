@@ -1,13 +1,12 @@
 package dev.puzzleshq.surface.gdx.screens;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import dev.puzzleshq.surface.api.element.IElement;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
-import dev.puzzleshq.surface.api.screens.AbstractGenericSurface;
+import dev.puzzleshq.surface.api.screens.AbstractSurfaceGeneric;
 import dev.puzzleshq.surface.gdx.SurfaceUIGdx;
 import dev.puzzleshq.surface.gdx.rendering.context.impl.GDXRenderContext;
 
-public abstract class AbstractGdxSurface extends AbstractGenericSurface<GDXRenderContext> {
+public abstract class AbstractGdxSurface extends AbstractSurfaceGeneric<GDXRenderContext> {
 
     public AbstractGdxSurface() {
         init();
@@ -15,7 +14,7 @@ public abstract class AbstractGdxSurface extends AbstractGenericSurface<GDXRende
 
     @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public void render(GDXRenderContext context) {
+    public void render() {
         for (IElement element : getElementCollection()) {
             IElementRenderer renderer = element.getRenderer(SurfaceUIGdx.INSTANCE);
             if (renderer != null)

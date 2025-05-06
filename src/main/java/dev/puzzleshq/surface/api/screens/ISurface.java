@@ -12,7 +12,10 @@ public interface ISurface<T extends IRenderContext> {
     void init();
     boolean isInitialized();
 
-    void render(T context);
+    void setContext(T context);
+    T getContext();
+
+    void render();
     void update(float delta);
 
     Collection<IElement> getElementCollection();

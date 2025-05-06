@@ -42,19 +42,19 @@ public class ButtonStyle {
     }
 
     public Color getHoverBackground() {
-        return onHoverBackground != null ? onHoverBackground : defaultBackground;
+        return onHoverBackground != null ? onHoverBackground : getDefaultBackground();
     }
 
     public Color getHoverOutline() {
-        return onHoverOutline != null ? onHoverOutline : defaultOutline;
+        return onHoverOutline != null ? onHoverOutline : getDefaultOutline();
     }
 
     public Color getPressBackground() {
-        return onPressBackground != null ? onPressBackground : defaultBackground;
+        return onPressBackground != null ? onPressBackground : getHoverBackground();
     }
 
     public Color getPressOutline() {
-        return onPressOutline != null ? onPressOutline : defaultOutline;
+        return onPressOutline != null ? onPressOutline : getHoverOutline();
     }
 
     public int getOutlineThickness() {

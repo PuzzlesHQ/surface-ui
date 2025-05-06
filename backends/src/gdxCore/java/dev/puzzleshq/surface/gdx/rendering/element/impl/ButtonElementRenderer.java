@@ -28,10 +28,18 @@ public class ButtonElementRenderer implements IElementRenderer<GDXRenderContext,
 
         Color color = batch.getColor();
 
-        GDXUtil.setColor(batch, style.getDefaultOutline());
+        boolean isBeingHovered = element.isHovering(surface);
+        boolean isBeingPressed = element.isBeingPressed();
+
+//        System.out.println(isBeingHovered);
+
+        java.awt.Color background = isBeingPressed ? style.getPressBackground() : (isBeingHovered ? style.getHoverBackground() : style.getDefaultBackground());
+        java.awt.Color outline = isBeingPressed ? style.getPressOutline() : (isBeingHovered ? style.getHoverOutline() : style.getDefaultOutline());
+
+        GDXUtil.setColor(batch, outline);
         batch.draw(SurfaceUIGdx.WHITE_PIXEL, rx, ry, element.getTotalWidth(), element.getTotalHeight());
 
-        GDXUtil.setColor(batch, style.getDefaultBackground());
+        GDXUtil.setColor(batch, background);
         batch.draw(SurfaceUIGdx.WHITE_PIXEL, rx + halfThickness, ry + halfThickness, element.getWidth(), element.getHeight());
 
         batch.setColor(color);
