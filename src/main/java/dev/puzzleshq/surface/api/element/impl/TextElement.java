@@ -1,4 +1,7 @@
 package dev.puzzleshq.surface.api.element.impl;
 
-public class TextElement extends AbstractElement{
+public class TextElement extends AbstractElement {
+
+    String text;
+
 }

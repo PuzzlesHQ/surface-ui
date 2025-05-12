@@ -7,11 +7,11 @@
   },
   "elements": [
     {
-      "type": "cereal:pulsing-image",
+      "type": "cereal:image",
       "id": "puzzle-logo",
       "meta": {
         "image": "cereal:textures/puzzle-loader-icon.png",
-        "frequency": 0.2,
+        "frequency": 1,
         "max-scale": 1.1,
         "min-scale": 1
       },
@@ -24,9 +24,9 @@
       "id": "ram-usage-bar",
       "meta": {
         "style": {
-          "foreground-full": "#ababab",
-          "foreground-empty": "#3d3d3d",
-          "background": "#ffffff"
+          "full-color": "#ababab",
+          "empty-color": "#3d3d3d",
+          "outline-color": "#ffffff"
         }
       },
       "anchors": ["center", "top"],
@@ -64,17 +64,24 @@
       "size": [500, 30]
     },
     {
+      "type": "cereal:tabbed-slider-bar",
+      "id": "slider-bar",
+      "meta": {},
+      "anchors": ["center", "center"]
+    },
+    {
+      "type": "cereal:toggle-button",
+      "id": "checkbox",
+      "meta": {
+      },
+      "anchors": ["center", "bottom"]
+    },
+    {
       "type": "cereal:button",
       "id": "button",
       "meta": {
         "style": {
-          "outline-thickness": 5,
-          "outline-color": "spicy-skin",
-          "background-color": "spicy-eye",
-          "outline-hover-color": "crab-skin",
-          "background-hover-color": "crab-eye",
-          "outline-press-color": "zombii-skin",
-          "background-press-color": "zombii-eye"
+          "outline-thickness": 3.5
         }
       },
       "anchors": ["center", "top"],

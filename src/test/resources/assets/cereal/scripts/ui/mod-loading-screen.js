@@ -19,15 +19,16 @@ function init(surface) {
 
     const testButton = thisSurface.getElement("button");
     if (testButton != null) {
+        // JavaScript
         testButton.setClickEvent((btn) => {
 //            testButton.getClickEvent().accept(btn);
-            prog += 1;
-            console.log("click");
+//            prog += 200;
         });
     }
 }
 
 function onRender(ctx) {
+    prog += 1;
     ramUsageBar.setProgress(prog);
 
     const logo = thisSurface.getElement("puzzle-logo");

@@ -1,8 +1,9 @@
 {
   "id": "cereal:mod-loading-progress-bar",
   "meta": {
-    "foreground-full": [7, 99, 10],
-    "foreground-empty": [3, 51, 5],
-    "background": [20, 212, 26]
+    "full-color": [7, 99, 10],
+    "empty-color": [3, 51, 5],
+    "outline-color": [20, 212, 26],
+    "outline-thickness": 2
   }
 }

@@ -7,31 +7,25 @@ import java.awt.*;
 @NeedsDocumentation
 public class ProgressBarStyle {
 
-    Color foregroundFull;
-    Color foregroundEmpty;
-    Color background;
+    public final Color full;
+    public final Color empty;
+    public final Color outline;
+
+    public final float outlineThickness;
 
     public ProgressBarStyle(
-            Color foregroundFull,
-            Color foregroundEmpty,
-            Color background
+            Color full,
+            Color empty,
+            Color outline,
+            float outlineThickness
     ) {
-        this.foregroundFull = foregroundFull;
-        this.foregroundEmpty = foregroundEmpty;
-        this.background = background;
+        this.full = full;
+        this.empty = empty;
+        this.outline = outline;
+
+        this.outlineThickness = outlineThickness;
     }
 
-    public Color getBackground() {
-        return background;
-    }
-
-    public Color getForegroundEmpty() {
-        return foregroundEmpty;
-    }
-
-    public Color getForegroundFull() {
-        return foregroundFull;
-    }
 
 //    public static final ProgressBarStyle DEFAULT = new ProgressBarStyle(
 //            new Color(7, 99, 10),
@@ -42,7 +36,8 @@ public class ProgressBarStyle {
     public static final ProgressBarStyle DEFAULT = new ProgressBarStyle(
             new Color(6, 176, 37),
             new Color(230, 230, 230),
-            new Color(188, 188, 188)
+            new Color(188, 188, 188),
+            2
     );
 
 }

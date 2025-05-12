@@ -2,19 +2,11 @@ package dev.puzzleshq.surface.gdx;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import dev.puzzleshq.surface.SurfaceSupervisor;
-import dev.puzzleshq.surface.api.element.impl.ButtonElement;
-import dev.puzzleshq.surface.api.element.impl.ImageElement;
-import dev.puzzleshq.surface.api.element.impl.ProgressBarElement;
-import dev.puzzleshq.surface.api.element.impl.PulsingImageElement;
+import dev.puzzleshq.surface.api.element.impl.*;
 import dev.puzzleshq.surface.api.module.AbstractSurfaceModule;
 import dev.puzzleshq.surface.api.module.ISurfaceModule;
 import dev.puzzleshq.surface.gdx.rendering.context.impl.GDXRenderContext;
-import dev.puzzleshq.surface.gdx.rendering.element.impl.ButtonElementRenderer;
-import dev.puzzleshq.surface.gdx.rendering.element.impl.ImageElementRenderer;
-import dev.puzzleshq.surface.gdx.rendering.element.impl.ProgressBarElementRenderer;
-import dev.puzzleshq.surface.gdx.rendering.element.impl.PulseImageElementRenderer;
-import dev.puzzleshq.surface.util.SurfacePoint;
+import dev.puzzleshq.surface.gdx.rendering.element.impl.*;
 
 import java.awt.*;
 
@@ -36,8 +28,9 @@ public class SurfaceUIGdx extends AbstractSurfaceModule<GDXRenderContext> {
         SurfaceUIGdx.init();
         this.register(ProgressBarElement.class, new ProgressBarElementRenderer());
         this.register(ButtonElement.class, new ButtonElementRenderer());
+        this.register(ToggleButtonElement.class, new ToggleButtonElementRenderer());
+        this.register(TabbedSliderBar.class, new TabbedSliderBarElementRenderer());
         this.register(ImageElement.class, new ImageElementRenderer());
-        this.register(PulsingImageElement.class, new PulseImageElementRenderer());
     }
 
 }

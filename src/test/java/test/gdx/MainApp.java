@@ -2,6 +2,8 @@ package test.gdx;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +18,7 @@ import dev.puzzleshq.surface.gdx.rendering.context.impl.GDXRenderContext;
 import dev.puzzleshq.surface.util.RawAssetLoader;
 import dev.puzzleshq.surface.util.ResourceLocation;
 import dev.puzzleshq.surface.util.SurfacePoint;
+import org.lwjgl.glfw.GLFW;
 
 public class MainApp extends ApplicationAdapter {
     private SpriteBatch batch;
@@ -29,7 +32,8 @@ public class MainApp extends ApplicationAdapter {
         SurfaceUILwjgl3Gdx.addSurfaceInputCapabilities();
 
         this.batch = new SpriteBatch();
-        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/mod-loading-screen.json5")).getString());
+        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/cosmic-reach/main-menu.json5")).getString());
+//        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/mod-loading-screen.json5")).getString());
         SurfaceSupervisor.setSurface(this.screenGDX.getId());
         Camera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.up.set(0.0F, -1.0F, 0.0F);
@@ -73,6 +77,7 @@ public class MainApp extends ApplicationAdapter {
 
         ScreenUtils.clear(240 / 255f, 240 / 255f, 240 / 255f, 1f);
         this.batch.begin();
+
         SurfaceSupervisor.renderCurrentSurface(this.context);
 //        this.screenGDX.render(this.context);
         this.batch.end();

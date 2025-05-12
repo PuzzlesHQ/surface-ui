@@ -23,6 +23,18 @@ public abstract class AbstractElement implements IElement {
         this.anchorY = AnchorY.NONE;
     }
 
+    protected int zIndex = 0;
+
+    @Override
+    public int getZIndex() {
+        return zIndex;
+    }
+
+    @Override
+    public void setZIndex(int index) {
+        this.zIndex = index;
+    }
+
     @Override
     public void update(ISurface surface, float delta) {}
 

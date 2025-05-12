@@ -4,37 +4,38 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import dev.puzzleshq.surface.api.element.impl.AbstractElement;
 import dev.puzzleshq.surface.api.element.impl.ButtonElement;
-import dev.puzzleshq.surface.api.element.impl.ProgressBarElement;
+import dev.puzzleshq.surface.api.element.impl.ToggleButtonElement;
 import dev.puzzleshq.surface.api.element.styles.ButtonStyle;
-import dev.puzzleshq.surface.api.element.styles.ProgressBarStyle;
+import dev.puzzleshq.surface.api.element.styles.ToggleButtonStyle;
 import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.gdx.GDXUtil;
 import dev.puzzleshq.surface.gdx.SurfaceUIGdx;
 import dev.puzzleshq.surface.gdx.rendering.context.impl.GDXRenderContext;
 
-public class ButtonElementRenderer implements IElementRenderer<GDXRenderContext, ButtonElement> {
+public class ToggleButtonElementRenderer implements IElementRenderer<GDXRenderContext, ToggleButtonElement> {
 
     @Override
-    public void render(ISurface<GDXRenderContext> surface, GDXRenderContext context, ButtonElement element) {
+    public void render(ISurface<GDXRenderContext> surface, GDXRenderContext context, ToggleButtonElement element) {
         Batch batch = context.getBatch();
 
         int rx = (int) AbstractElement.getRealX((int) context.getViewport().getWorldWidth(), element);
         int ry = (int) AbstractElement.getRealY((int) context.getViewport().getWorldHeight(), element);
 
-        ButtonStyle style = element.getStyle();
+        ToggleButtonStyle style = element.getStyle();
 
-        float halfThickness = (style.getOutlineThickness());
+        float halfThickness = (style.outlineThickness);
 
         Color color = batch.getColor();
 
         boolean isBeingHovered = element.isBeingHovered();
         boolean isBeingPressed = element.isBeingPressed();
+        boolean isOn = element.getState();
 
 //        System.out.println(isBeingHovered);
 
-        java.awt.Color background = isBeingPressed ? style.getPressBackground() : (isBeingHovered ? style.getHoverBackground() : style.getDefaultBackground());
-        java.awt.Color outline = isBeingPressed ? style.getPressOutline() : (isBeingHovered ? style.getHoverOutline() : style.getDefaultOutline());
+        java.awt.Color background = isBeingHovered ? (isOn ? style.onHoverBackgroundToggedOn : style.onHoverBackgroundToggedOff) : ((isOn) ? style.onToggleOnBackground : style.onToggleOffBackground);
+        java.awt.Color outline = isBeingHovered ? (isOn ? style.onHoverOutlineToggedOn : style.onHoverOutlineToggedOff) : ((isOn) ? style.onToggleOnOutline : style.onToggleOffOutline);
 
         GDXUtil.setColor(batch, outline);
         batch.draw(SurfaceUIGdx.WHITE_PIXEL, rx, ry, element.getTotalWidth(), element.getTotalHeight());

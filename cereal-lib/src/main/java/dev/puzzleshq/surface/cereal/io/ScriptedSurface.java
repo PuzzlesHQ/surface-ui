@@ -73,7 +73,7 @@ public class ScriptedSurface extends AbstractSurfaceGeneric<IRenderContext> {
     public void render() {
         if (backgroundColor != null)
             context.clearScreenWithColor(backgroundColor);
-        if (this.onRender != null && this.onRender instanceof Function) {
+        if (this.onRender != null && this.onRender instanceof Function && this.scope != null) {
             Context.call(ContextFactory.getGlobal(), (Function) this.onRender, scope, scope, new Object[]{ context });
 //            ((Function) this.onRender).call(surfaceContext, scope, scope, new Object[]{ context });
         }
@@ -88,7 +88,7 @@ public class ScriptedSurface extends AbstractSurfaceGeneric<IRenderContext> {
 
     @Override
     public void update(float delta) {
-        if (this.onUpdate != null && this.onUpdate instanceof Function) {
+        if (this.onUpdate != null && this.onUpdate instanceof Function && scope != null) {
             Context.call(ContextFactory.getGlobal(), (Function) this.onUpdate, scope, scope, new Object[]{ delta });
         }
         super.update(delta);
@@ -98,9 +98,11 @@ public class ScriptedSurface extends AbstractSurfaceGeneric<IRenderContext> {
     public void preSwitchedTo(ISurface<?> currentSurface, ISurface<?> oldSurface) {
         super.preSwitchedTo(currentSurface, oldSurface);
 
-        Object initFunction = scope.get("preSwitchedTo", scope);
-        if (initFunction instanceof Function) {
-            Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, oldSurface });
+        if (scope != null) {
+            Object initFunction = scope.get("preSwitchedTo", scope);
+            if (initFunction instanceof Function) {
+                Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, oldSurface });
+            }
         }
     }
 
@@ -108,9 +110,11 @@ public class ScriptedSurface extends AbstractSurfaceGeneric<IRenderContext> {
     public void preSwitchSurface(ISurface<?> currentSurface, ISurface<?> newSurface) {
         super.preSwitchSurface(currentSurface, newSurface);
 
-        Object initFunction = scope.get("preSwitchSurface", scope);
-        if (initFunction instanceof Function) {
-            Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, newSurface });
+        if (scope != null) {
+            Object initFunction = scope.get("preSwitchSurface", scope);
+            if (initFunction instanceof Function) {
+                Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, newSurface });
+            }
         }
     }
 
@@ -121,9 +125,11 @@ public class ScriptedSurface extends AbstractSurfaceGeneric<IRenderContext> {
         if (currentSurface instanceof IProcessor processor)
             SurfaceCoreInputProcessor.setProcessor(processor);
 
-        Object initFunction = scope.get("postSwitchedTo", scope);
-        if (initFunction instanceof Function) {
-            Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, oldSurface });
+        if (scope != null) {
+            Object initFunction = scope.get("postSwitchedTo", scope);
+            if (initFunction instanceof Function) {
+                Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, oldSurface });
+            }
         }
     }
 
@@ -131,9 +137,11 @@ public class ScriptedSurface extends AbstractSurfaceGeneric<IRenderContext> {
     public void postSwitchSurface(ISurface<?> currentSurface, ISurface<?> newSurface) {
         super.postSwitchSurface(currentSurface, newSurface);
 
-        Object initFunction = scope.get("preSwitchSurface", scope);
-        if (initFunction instanceof Function) {
-            Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, newSurface });
+        if (scope != null) {
+            Object initFunction = scope.get("preSwitchSurface", scope);
+            if (initFunction instanceof Function) {
+                Context.call(ContextFactory.getGlobal(), (Function) initFunction, scope, scope, new Object[]{ currentSurface, newSurface });
+            }
         }
     }
 

@@ -1,0 +1,76 @@
+{
+  "id": "cereal:mod-loading-screen",
+  "meta": {
+    "styles": ["cereal:ui/styles/mod-loading-progress-bar.json"],
+    "background-color": "black"
+  },
+  "elements": [
+    {
+      "type": "cereal:button",
+      "id": "start-button",
+      "meta": {},
+      "anchors": ["center", "center"],
+      "pos": [0, -40],
+      "size": [275, 35]
+    },
+    {
+      "type": "cereal:button",
+      "id": "multiplayer-button",
+      "meta": {},
+      "anchors": ["center", "center"],
+      "pos": [0, 5],
+      "size": [275, 35]
+    },
+    {
+      "type": "cereal:button",
+      "id": "load-button",
+      "meta": {},
+      "anchors": ["center", "center"],
+      "pos": [0, 50],
+      "size": [275, 35]
+    },
+    {
+      "type": "cereal:button",
+      "id": "options-button",
+      "meta": {},
+      "anchors": ["center", "center"],
+      "pos": [-70, 95],
+      "size": [135, 35]
+    },
+    {
+      "type": "cereal:button",
+      "id": "mods-button",
+      "meta": {},
+      "anchors": ["center", "center"],
+      "pos": [70, 95],
+      "size": [135, 35]
+    },
+    {
+      "type": "cereal:button",
+      "id": "credits-button",
+      "meta": {},
+      "anchors": ["center", "center"],
+      "pos": [0, 140],
+      "size": [275, 35]
+    },
+    {
+      "type": "cereal:button",
+      "id": "quit-button",
+      "meta": {},
+      "anchors": ["center", "center"],
+      "pos": [0, 185],
+      "size": [275, 35]
+    },
+    {
+      "type": "cereal:image",
+      "id": "puzzle-logo",
+      "meta": {
+        "image": "cereal:textures/reach-of-the-cosmic.png",
+        "min-scale": 2
+      },
+      "anchors": ["center", "center"],
+      "pos": [0, -172],
+      "size": [192, 64]
+    }
+  ]
+}

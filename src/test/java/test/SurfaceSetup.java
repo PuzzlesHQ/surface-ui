@@ -13,13 +13,15 @@ public class SurfaceSetup {
     public static final ProgressBarStyle REGULAR = new ProgressBarStyle(
             new Color(7, 99, 10),
             new Color(3, 51, 5),
-            new Color(20, 212, 26)
+            new Color(20, 212, 26),
+            2
     );
 
     public static final ProgressBarStyle RAM = new ProgressBarStyle(
             new Color(171, 171, 171),
             new Color(61, 61, 61),
-            new Color(255, 255, 255)
+            new Color(255, 255, 255),
+            2
     );
 
     public static void setup(ISurface<?> surface) {

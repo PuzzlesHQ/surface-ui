@@ -5,6 +5,7 @@ import dev.puzzleshq.surface.api.element.IElement;
 import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -74,14 +75,13 @@ public abstract class AbstractSurface<T extends IRenderContext> implements ISurf
     @Override
     public void update(float delta) {
         for (IElement e : getElementCollection()) {
-//            System.out.println(delta);
             e.update(this, delta);
         }
     }
 
     @Override
     public Collection<IElement> getElementCollection() {
-        return elementMap.values();
+        return elementMap.values().stream().sorted(Comparator.comparingInt(IElement::getZIndex)).toList();
     }
 
     @Override

@@ -1,12 +1,11 @@
 package dev.puzzleshq.surface.cereal;
 
 import dev.puzzleshq.surface.api.element.IElement;
-import dev.puzzleshq.surface.api.element.impl.ButtonElement;
-import dev.puzzleshq.surface.api.element.impl.ImageElement;
-import dev.puzzleshq.surface.api.element.impl.ProgressBarElement;
-import dev.puzzleshq.surface.api.element.impl.PulsingImageElement;
+import dev.puzzleshq.surface.api.element.impl.*;
 import dev.puzzleshq.surface.api.element.styles.ButtonStyle;
 import dev.puzzleshq.surface.api.element.styles.ProgressBarStyle;
+import dev.puzzleshq.surface.api.element.styles.TabbedSliderBarStyle;
+import dev.puzzleshq.surface.api.element.styles.ToggleButtonStyle;
 import dev.puzzleshq.surface.util.Colors;
 import dev.puzzleshq.surface.cereal.js.hidden.ClassFinder;
 import dev.puzzleshq.surface.util.RawAssetLoader;
@@ -39,23 +38,50 @@ public class CerealSupervisor {
     }
 
     private static void init() {
-        CerealSupervisor.register("cereal:pulsing-image", (o) -> {
-            PulsingImageElement element = new PulsingImageElement();
-            element.setTexture(ResourceLocation.of(o.getString("image", "cereal:textures/missing-no.png")));
-            element.setTint(CerealSupervisor.getColorOrDefault(o, "tint", Color.WHITE));
-            element.setRotation(o.getInt("rotation", 0));
-            element.setMaxScale(o.getFloat("max-scale", 1.1f));
-            element.setMinScale(o.getFloat("min-scale", .8f));
-            element.setFrequency(o.getFloat("frequency", 1));
-            return element;
+        CerealSupervisor.register("cereal:tabbed-slider-bar", (o) -> {
+            JsonValue styleValue = o.get("style");
+            JsonObject object = null;
+            if (styleValue != null && styleValue.isObject()) object = styleValue.asObject();
+            if (styleValue != null && styleValue.isString()) object = CerealSupervisor.getJsonDataFromLocation(styleValue.asString());
+            TabbedSliderBarStyle style = TabbedSliderBarStyle.DEFAULT;
+            if (object != null) {
+                Color full = CerealSupervisor.getColorOrDefault(object, "full-color", ProgressBarStyle.DEFAULT.full);
+                Color empty = CerealSupervisor.getColorOrDefault(object, "empty-color", ProgressBarStyle.DEFAULT.empty);
+                Color outline = CerealSupervisor.getColorOrDefault(object, "outline-color", ProgressBarStyle.DEFAULT.outline);
+
+                Color hoverFull = CerealSupervisor.getColorOrDefault(object, "full-hover-color", ProgressBarStyle.DEFAULT.full);
+                Color hoverEmpty = CerealSupervisor.getColorOrDefault(object, "empty-hover-color", ProgressBarStyle.DEFAULT.empty);
+                Color hoverOutline = CerealSupervisor.getColorOrDefault(object, "outline-hover-color", ProgressBarStyle.DEFAULT.outline);
+
+                Color tabOutline = CerealSupervisor.getColorOrDefault(object, "tab-outline-color", ProgressBarStyle.DEFAULT.full);
+                Color tabBackground = CerealSupervisor.getColorOrDefault(object, "tab-background-hover-color", ProgressBarStyle.DEFAULT.empty);
+                Color hoverTabOutline = CerealSupervisor.getColorOrDefault(object, "tab-outline-hover-color", ProgressBarStyle.DEFAULT.outline);
+                Color hoverTabBackground = CerealSupervisor.getColorOrDefault(object, "tab-background-hover-color", ProgressBarStyle.DEFAULT.outline);
+
+                float tab_outline_thickness = object.getFloat("tab-outline-thickness", ProgressBarStyle.DEFAULT.outlineThickness);
+                float slider_outline_thickness = object.getFloat("slider-outline-thickness", ProgressBarStyle.DEFAULT.outlineThickness);
+
+                style = new TabbedSliderBarStyle(
+                        full, empty,
+                        outline, tabOutline,
+                        tabBackground, hoverFull,
+                        hoverEmpty, hoverOutline,
+                        hoverTabOutline, hoverTabBackground,
+                        tab_outline_thickness, slider_outline_thickness
+                );
+            }
+            return new TabbedSliderBar(style);
         });
 
         CerealSupervisor.register("cereal:image", (o) -> {
             ImageElement element = new ImageElement();
-            element.setTexture(ResourceLocation.of(o.getString("image", "cereal:textures/missing-no.png")));
-            element.setTint(CerealSupervisor.getColorOrDefault(o, "tint", Color.WHITE));
+            element.setMinScale(o.getFloat("min-scale", .8f));
+            element.setMaxScale(o.getFloat("max-scale", 1.1f));
             element.setRotation(o.getInt("rotation", 0));
-            element.setScale(o.getFloat("scale", 1));
+            element.setFrequency(o.getFloat("frequency", -1));
+            element.setOrigin(CerealSupervisor.getEnumConstantOrDefault(o, "origin", ImageElement.Origin.CENTER, ImageElement.Origin.class));
+            element.setTint(CerealSupervisor.getColorOrDefault(o, "tint", Color.WHITE));
+            element.setTexture(ResourceLocation.of(o.getString("image", "cereal:textures/missing-no.png")));
             return element;
         });
 
@@ -66,14 +92,17 @@ public class CerealSupervisor {
             if (styleValue != null && styleValue.isString()) object = CerealSupervisor.getJsonDataFromLocation(styleValue.asString());
             ProgressBarStyle style = ProgressBarStyle.DEFAULT;
             if (object != null) {
-                Color foregroundFull = CerealSupervisor.getColorOrDefault(object, "foreground-full", ProgressBarStyle.DEFAULT.getForegroundFull());
-                Color foregroundEmpty = CerealSupervisor.getColorOrDefault(object, "foreground-empty", ProgressBarStyle.DEFAULT.getForegroundEmpty());
-                Color background = CerealSupervisor.getColorOrDefault(object, "background", ProgressBarStyle.DEFAULT.getBackground());
+                Color foregroundFull = CerealSupervisor.getColorOrDefault(object, "full-color", ProgressBarStyle.DEFAULT.full);
+                Color foregroundEmpty = CerealSupervisor.getColorOrDefault(object, "empty-color", ProgressBarStyle.DEFAULT.empty);
+                Color background = CerealSupervisor.getColorOrDefault(object, "outline-color", ProgressBarStyle.DEFAULT.outline);
+
+                float outline_thickness = object.getFloat("outline-thickness", ProgressBarStyle.DEFAULT.outlineThickness);
 
                 style = new ProgressBarStyle(
                         foregroundFull,
                         foregroundEmpty,
-                        background
+                        background,
+                        outline_thickness
                 );
             }
             return new ProgressBarElement(style);
@@ -95,7 +124,7 @@ public class CerealSupervisor {
                 Color background_press = CerealSupervisor.getColorOrDefault(object, "background-press-color", ButtonStyle.DEFAULT.getPressBackground());
                 Color outline_press = CerealSupervisor.getColorOrDefault(object, "outline-press-color", ButtonStyle.DEFAULT.getPressOutline());
 
-                int outline_thickness = object.getInt("outline-thickness", ButtonStyle.DEFAULT.getOutlineThickness());
+                float outline_thickness = object.getFloat("outline-thickness", ButtonStyle.DEFAULT.getOutlineThickness());
 
                 style = new ButtonStyle(
                         background, outline,
@@ -106,6 +135,64 @@ public class CerealSupervisor {
             }
             return new ButtonElement(style);
         });
+
+        CerealSupervisor.register("cereal:toggle-button", (o) -> {
+            JsonValue styleValue = o.get("style");
+            JsonObject object = null;
+            if (styleValue != null && styleValue.isObject()) object = styleValue.asObject();
+            if (styleValue != null && styleValue.isString()) object = CerealSupervisor.getJsonDataFromLocation(styleValue.asString());
+            ToggleButtonStyle style = ToggleButtonStyle.DEFAULT;
+            if (object != null) {
+                Color backgroundHoverToggledOn = CerealSupervisor.getColorOrDefault(object, "toggled-on-background-hover-color", ToggleButtonStyle.DEFAULT.onHoverBackgroundToggedOn);
+                Color outlineHoverToggledOn = CerealSupervisor.getColorOrDefault(object, "toggled-on-outline-hover-color", ToggleButtonStyle.DEFAULT.onHoverOutlineToggedOn);
+
+                Color backgroundHoverToggledOff = CerealSupervisor.getColorOrDefault(object, "toggled-off-background-hover-color", ToggleButtonStyle.DEFAULT.onHoverBackgroundToggedOff);
+                Color outlineHoverToggledOff = CerealSupervisor.getColorOrDefault(object, "toggled-off-outline-hover-color", ToggleButtonStyle.DEFAULT.onHoverOutlineToggedOff);
+
+                Color backgroundToggedOn = CerealSupervisor.getColorOrDefault(object, "toggled-on-background-color", ToggleButtonStyle.DEFAULT.onToggleOnBackground);
+                Color outlineToggedOn = CerealSupervisor.getColorOrDefault(object, "toggled-on-outline-color", ToggleButtonStyle.DEFAULT.onToggleOnOutline);
+
+                Color backgroundToggedOff = CerealSupervisor.getColorOrDefault(object, "toggled-off-background-color", ToggleButtonStyle.DEFAULT.onToggleOffBackground);
+                Color outlineToggedOff = CerealSupervisor.getColorOrDefault(object, "toggled-off-outline-color", ToggleButtonStyle.DEFAULT.onToggleOffOutline);
+
+                float outline_thickness = object.getFloat("outline-thickness", ToggleButtonStyle.DEFAULT.outlineThickness);
+
+                style = new ToggleButtonStyle(
+                        backgroundHoverToggledOn,
+                        outlineHoverToggledOn,
+                        backgroundHoverToggledOff,
+                        outlineHoverToggledOff,
+                        backgroundToggedOn,
+                        outlineToggedOn,
+                        backgroundToggedOff,
+                        outlineToggedOff,
+                        outline_thickness
+                );
+            }
+            return new ToggleButtonElement(style);
+        });
+    }
+
+    private static <T extends Enum<T>> T getEnumConstantOrDefault(JsonObject o, String name, T defaultValue, Class<T> enumClass) {
+        JsonValue value = o.get(name);
+        if (value == null) return defaultValue;
+
+        if (value.isNumber()) {
+            try {
+                return enumClass.getEnumConstants()[value.asInt()];
+            } catch (Exception ignore) {
+                throw new IllegalArgumentException("JsonValue \"" + value + "\" at Name: \"" + name + "\" must be valid ordinal to enum constant.");
+            }
+        }
+        if (value.isString()) {
+            try {
+                return Enum.valueOf(enumClass, value.asString());
+            } catch (Exception ignore) {
+                throw new IllegalArgumentException("JsonValue \"" + value + "\" at Name: \"" + name + "\" must be a valid enum constant.");
+            }
+        }
+
+        return defaultValue;
     }
 
     public static Color getColor(JsonObject object, String s) {

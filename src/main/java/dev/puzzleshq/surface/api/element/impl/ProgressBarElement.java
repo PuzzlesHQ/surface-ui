@@ -20,7 +20,7 @@ public class ProgressBarElement extends AbstractElement {
         this.width = 500;
         this.height = 30;
 
-        this.progress = 50;
+        this.progress = 75;
         this.max = 100;
 
         this.calculateStep();
@@ -44,31 +44,20 @@ public class ProgressBarElement extends AbstractElement {
 
     @Override
     public float getTotalWidth() {
-        return this.width + 4;
+        return this.width + 2 * this.style.outlineThickness;
     }
 
     @Override
     public float getTotalHeight() {
-        return this.height + 4;
-    }
-
-    public static float getRealX(final int width, final ProgressBarElement element) {
-        switch (element.anchorX) {
-            case NONE:
-                return element.x;
-            case RIGHT:
-                return element.x + (width * .5f) - (element.width + 4);
-            case LEFT:
-                return element.x - (width * .5f);
-            case CENTER:
-                return element.x - (element.width * .5f);
-            default:
-                throw new IllegalArgumentException();
-        }
+        return this.height + 2 * this.style.outlineThickness;
     }
 
     public ProgressBarStyle getStyle() {
         return style;
+    }
+
+    public void setStyle(ProgressBarStyle style) {
+        this.style = style;
     }
 
     public int getMax() {

@@ -43,15 +43,16 @@ public class ImageElementRenderer implements IElementRenderer<GDXRenderContext, 
         int ry = (int) AbstractElement.getRealY(context.getViewport().getWorldHeight(), element);
 
         Color color = batch.getColor();
+        ImageElement.Origin origin = element.getOrigin();
 
         GDXUtil.setColor(batch, element.getTint());
         batch.draw(
                 texture,
                 rx,
                 ry,
-                0, 0,
+                getOriginX(element, origin), getOriginY(element, origin),
                 element.getTotalWidth(), element.getTotalHeight(),
-                element.getScale(), element.getScale(),
+                element.getVisualScale(), element.getVisualScale(),
                 element.getRotation(),
                 0, 0,
                 texW, texH,
@@ -59,6 +60,22 @@ public class ImageElementRenderer implements IElementRenderer<GDXRenderContext, 
         );
 
         batch.setColor(color);
+    }
+
+    private static float getOriginX(ImageElement element, ImageElement.Origin origin) {
+        return switch (origin) {
+            case TOP_LEFT, BOTTOM_LEFT -> 0.0F;
+            case TOP_RIGHT, BOTTOM_RIGHT -> element.getTotalWidth();
+            case CENTER -> element.getTotalWidth() / 2f;
+        };
+    }
+
+    private static float getOriginY(ImageElement element, ImageElement.Origin origin) {
+        return switch (origin) {
+            case TOP_RIGHT, TOP_LEFT -> 0.0F;
+            case BOTTOM_RIGHT, BOTTOM_LEFT -> element.getTotalHeight();
+            case CENTER -> element.getTotalHeight() / 2f;
+        };
     }
 
 }

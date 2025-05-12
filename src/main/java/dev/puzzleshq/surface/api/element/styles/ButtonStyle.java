@@ -13,7 +13,7 @@ public class ButtonStyle {
     private final Color onHoverOutline;
     private final Color onPressBackground;
     private final Color onPressOutline;
-    private final int outlineThickness;
+    private final float outlineThickness;
 
     public ButtonStyle(
             Color defaultBackground,
@@ -22,7 +22,7 @@ public class ButtonStyle {
             Color onHoverOutline,
             Color onPressBackground,
             Color onPressOutline,
-            int outlineThickness
+            float outlineThickness
     ) {
         this.defaultBackground = defaultBackground;
         this.defaultOutline = defaultOutline;
@@ -57,17 +57,17 @@ public class ButtonStyle {
         return onPressOutline != null ? onPressOutline : getHoverOutline();
     }
 
-    public int getOutlineThickness() {
+    public float getOutlineThickness() {
         return outlineThickness;
     }
 
     public static final ButtonStyle DEFAULT = new ButtonStyle(
-            Color.BLACK,
-            Color.GRAY,
-            Color.BLACK,
-            Color.WHITE,
-            Color.DARK_GRAY,
-            Color.WHITE,
-            2
+            Color.BLACK, // bg-norm
+            Color.DARK_GRAY, // out-norm
+            Color.BLACK, // bg-norm-hover
+            Color.WHITE, // out-norm-hover
+            Color.DARK_GRAY, // bg-norm-pressed
+            Color.WHITE, // out-norm-pressed
+            1.5f
     );
 }

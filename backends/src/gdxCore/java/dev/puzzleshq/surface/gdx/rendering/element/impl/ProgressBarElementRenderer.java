@@ -23,20 +23,20 @@ public class ProgressBarElementRenderer implements IElementRenderer<GDXRenderCon
         ProgressBarStyle style = element.getStyle();
 
         Color color = batch.getColor();
-        GDXUtil.setColor(batch, style.getBackground());
+        GDXUtil.setColor(batch, style.outline);
         batch.draw(SurfaceUIGdx.WHITE_PIXEL, rx, ry, element.getTotalWidth(), element.getTotalHeight());
 
         boolean isFull = element.isFull();
-        GDXUtil.setColor(batch, isFull ? style.getForegroundFull() : style.getForegroundEmpty());
-        batch.draw(SurfaceUIGdx.WHITE_PIXEL, rx + 2, ry + 2, element.getWidth(), element.getHeight());
+        GDXUtil.setColor(batch, isFull ? style.full : style.empty);
+        batch.draw(SurfaceUIGdx.WHITE_PIXEL, rx + style.outlineThickness, ry + style.outlineThickness, element.getWidth(), element.getHeight());
 
         if (isFull) {
             batch.setColor(color);
             return;
         }
 
-        GDXUtil.setColor(batch, style.getForegroundFull());
-        batch.draw(SurfaceUIGdx.WHITE_PIXEL, rx + 2, ry + 2, (int) (element.getProgress() * element.getStep()), element.getHeight());
+        GDXUtil.setColor(batch, style.full);
+        batch.draw(SurfaceUIGdx.WHITE_PIXEL, rx + style.outlineThickness, ry + style.outlineThickness, (int) (element.getProgress() * element.getStep()), element.getHeight());
         batch.setColor(color);
     }
 }

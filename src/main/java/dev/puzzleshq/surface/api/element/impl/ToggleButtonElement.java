@@ -1,34 +1,38 @@
+
 package dev.puzzleshq.surface.api.element.impl;
 
 import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.SurfaceSupervisor;
 import dev.puzzleshq.surface.api.element.styles.ButtonStyle;
-import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
+import dev.puzzleshq.surface.api.element.styles.ToggleButtonStyle;
 import dev.puzzleshq.surface.api.input.event.mouse.MouseClickEvent;
+import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
 import dev.puzzleshq.surface.api.screens.ISurface;
 import dev.puzzleshq.surface.util.SurfacePoint;
 
 import java.util.function.Consumer;
 
 @NeedsDocumentation
-public class ButtonElement extends AbstractElement implements IGenericInputProcessor {
+public class ToggleButtonElement extends AbstractElement implements IGenericInputProcessor {
 
-    protected ButtonStyle style;
+    protected ToggleButtonStyle style;
 
-    public ButtonElement(ButtonStyle style) {
-        this.width = 250;
-        this.height = 50;
+    protected boolean state = false;
+
+    public ToggleButtonElement(ToggleButtonStyle style) {
+        this.width = 10;
+        this.height = 10;
 
         this.style = style;
     }
 
-    Consumer<ButtonElement> elementConsumer = (b) -> {};
+    Consumer<ToggleButtonElement> elementConsumer = (b) -> {};
 
-    public void setClickEvent(Consumer<ButtonElement> elementConsumer) {
+    public void setToggleEvent(Consumer<ToggleButtonElement> elementConsumer) {
         this.elementConsumer = elementConsumer;
     }
 
-    public Consumer<ButtonElement> getClickEvent() {
+    public Consumer<ToggleButtonElement> getToggleEvent() {
         return this.elementConsumer;
     }
 
@@ -51,7 +55,7 @@ public class ButtonElement extends AbstractElement implements IGenericInputProce
         float vy = AbstractElement.getRealY(vpSize.y, this);
 
         SurfacePoint projMouse = SurfaceSupervisor.unprojectPoint(SurfaceSupervisor.MOUSE_POSITION);
-        isBeingHoveredOver = (projMouse.x >= vx && projMouse.x <= vx + width && projMouse.y >= vy && projMouse.y <= vy + height);
+        isBeingHoveredOver = (projMouse.x >= vx && projMouse.x <= vx + getTotalWidth() && projMouse.y >= vy && projMouse.y <= vy + getTotalHeight());
 
         return isBeingHoveredOver;
     }
@@ -81,6 +85,7 @@ public class ButtonElement extends AbstractElement implements IGenericInputProce
 
     private void onRelease() {
         isBeingPressed = false;
+        state = !state;
     }
 
     private void onPress() {
@@ -92,25 +97,29 @@ public class ButtonElement extends AbstractElement implements IGenericInputProce
         return isBeingPressed;
     }
 
-    public void setStyle(ButtonStyle style) {
+    public void setStyle(ToggleButtonStyle style) {
         this.style = style;
     }
 
-    public ButtonStyle getStyle() {
+    public ToggleButtonStyle getStyle() {
         return style;
     }
 
     @Override
     public float getTotalWidth() {
-        return 2 * style.getOutlineThickness() + this.width;
+        return 2 * style.outlineThickness + this.width;
     }
 
     @Override
     public float getTotalHeight() {
-        return 2 * style.getOutlineThickness() + this.height;
+        return 2 * style.outlineThickness + this.height;
     }
 
     public boolean isBeingHovered() {
         return isBeingHoveredOver;
+    }
+
+    public boolean getState() {
+        return state;
     }
 }

@@ -12,6 +12,9 @@ public interface IElement {
 
     void update(final ISurface surface, final float delta);
 
+    void setZIndex(int index);
+    int getZIndex();
+
     void setVisibility(final boolean visibility);
     boolean isVisible();
 
