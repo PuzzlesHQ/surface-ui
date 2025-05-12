@@ -139,33 +139,21 @@ public abstract class AbstractElement implements IElement {
     }
 
     public static float getRealX(final float screenWidth, final AbstractElement element) {
-        switch (element.anchorX) {
-            case NONE:
-                return element.x;
-            case RIGHT:
-                return element.x + (screenWidth * .5f) - (element.getTotalWidth());
-            case LEFT:
-                return element.x - (screenWidth * .5f);
-            case CENTER:
-                return element.x - (element.getTotalWidth() * .5f);
-            default:
-                throw new IllegalArgumentException();
-        }
+        return switch (element.anchorX) {
+            case NONE -> element.x;
+            case RIGHT -> element.x + (screenWidth * .5f) - (element.getTotalWidth());
+            case LEFT -> element.x - (screenWidth * .5f);
+            case CENTER -> element.x - (element.getTotalWidth() * .5f);
+        };
     }
 
     public static float getRealY(final float screenHeight, AbstractElement element) {
-        switch (element.anchorY) {
-            case NONE:
-                return element.y;
-            case TOP:
-                return element.y - (screenHeight * .5f);
-            case BOTTOM:
-                return element.y + (screenHeight * .5f) - (element.getTotalHeight());
-            case CENTER:
-                return element.y - (element.getTotalHeight() * .5f);
-            default:
-                throw new IllegalArgumentException();
-        }
+        return switch (element.anchorY) {
+            case NONE -> element.y;
+            case TOP -> element.y - (screenHeight * .5f);
+            case BOTTOM -> element.y + (screenHeight * .5f) - (element.getTotalHeight());
+            case CENTER -> element.y - (element.getTotalHeight() * .5f);
+        };
     }
 
 }
