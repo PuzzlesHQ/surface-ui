@@ -32,8 +32,9 @@ public class MainApp extends ApplicationAdapter {
         SurfaceUILwjgl3Gdx.addSurfaceInputCapabilities();
 
         this.batch = new SpriteBatch();
-        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/cosmic-reach/main-menu.json5")).getString());
+//        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/cosmic-reach/main-menu.json5")).getString());
 //        this.screenGDX = SurfaceDeserializer.deserialize(RawAssetLoader.getClassPathAsset(ResourceLocation.of("cereal:ui/mod-loading-screen.json5")).getString());
+        SurfaceSupervisor.register("gdx-surface", this.screenGDX = new GameBootingScreenGDX());
         SurfaceSupervisor.setSurface(this.screenGDX.getId());
         Camera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.up.set(0.0F, -1.0F, 0.0F);

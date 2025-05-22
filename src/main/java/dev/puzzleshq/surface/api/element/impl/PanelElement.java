@@ -1,51 +1,58 @@
-package dev.puzzleshq.surface.api.screens;
+package dev.puzzleshq.surface.api.element.impl;
 
-import dev.puzzlehq.annotation.documentation.NeedsDocumentation;
 import dev.puzzleshq.surface.api.element.IElement;
-import dev.puzzleshq.surface.api.input.SurfaceCoreInputProcessor;
+import dev.puzzleshq.surface.api.element.styles.PanelStyle;
 import dev.puzzleshq.surface.api.input.event.keyboard.CharTypedEvent;
 import dev.puzzleshq.surface.api.input.event.keyboard.KeyPressEvent;
 import dev.puzzleshq.surface.api.input.event.mouse.MouseClickEvent;
 import dev.puzzleshq.surface.api.input.event.mouse.MouseMoveEvent;
 import dev.puzzleshq.surface.api.input.event.mouse.MouseScrollEvent;
 import dev.puzzleshq.surface.api.input.generic.IGenericInputProcessor;
-import dev.puzzleshq.surface.api.rendering.context.IRenderContext;
-import dev.puzzleshq.surface.api.rendering.element.IElementRenderer;
 
-import java.awt.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-@NeedsDocumentation
-public abstract class AbstractSurfaceGeneric<T extends IRenderContext> extends AbstractSurface<T> implements IGenericInputProcessor {
+public class PanelElement extends AbstractElement implements IGenericInputProcessor {
 
-    @Override
-    public void postSwitchedTo(ISurface<?> currentSurface, ISurface<?> oldSurface) {
-        super.postSwitchedTo(currentSurface, oldSurface);
+    protected Map<String, IElement> elementMap;
 
-        SurfaceCoreInputProcessor.setProcessor(this);
+    private PanelStyle style;
+
+    public PanelElement() {
+        this(PanelStyle.DEFAULT);
     }
 
-    protected Color backgroundColor = null;
+    public PanelElement(PanelStyle style) {
+        this.style = style;
+        this.width = 300;
+        this.height = 300;
 
-    public void setBackgroundColor(Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
+        this.elementMap = new ConcurrentHashMap<>();
     }
 
-    public Color getBackgroundColor() {
-        return backgroundColor;
+    public void addElement(String id, IElement element) {
+        this.elementMap.put(id, element);
     }
 
-    @Override
-    public void render() {
-        if (backgroundColor != null)
-            context.clearScreenWithColor(backgroundColor);
-        
-        for (IElement element : getElementCollection()) {
-            ((IElementRenderer)context.getParentModule().getElementRenderer(element.getClass())).render(
-                    this,
-                    context,
-                    element
-            );
-        }
+    public IElement getElement(String id) {
+        return this.elementMap.get(id);
+    }
+
+    public void removeElement(String id) {
+        this.elementMap.remove(id);
+    }
+
+    public void clearElements() {
+        this.elementMap.clear();
+    }
+
+    public PanelStyle getStyle() {
+        return style;
+    }
+
+    public void setStyle(PanelStyle style) {
+        this.style = style;
     }
 
     public void onScroll(MouseScrollEvent e) {
@@ -93,4 +100,7 @@ public abstract class AbstractSurfaceGeneric<T extends IRenderContext> extends A
         }
     }
 
+    public Collection<IElement> getElementCollection() {
+        return this.elementMap.values();
+    }
 }

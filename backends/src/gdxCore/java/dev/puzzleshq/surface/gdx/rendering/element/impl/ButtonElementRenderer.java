@@ -19,8 +19,8 @@ public class ButtonElementRenderer implements IElementRenderer<GDXRenderContext,
     public void render(ISurface<GDXRenderContext> surface, GDXRenderContext context, ButtonElement element) {
         Batch batch = context.getBatch();
 
-        int rx = (int) AbstractElement.getRealX((int) context.getViewport().getWorldWidth(), element);
-        int ry = (int) AbstractElement.getRealY((int) context.getViewport().getWorldHeight(), element);
+        int rx = (int) AbstractElement.getRealX((int) context.getVPSize().x, element);
+        int ry = (int) AbstractElement.getRealY((int) context.getVPSize().y, element);
 
         ButtonStyle style = element.getStyle();
 

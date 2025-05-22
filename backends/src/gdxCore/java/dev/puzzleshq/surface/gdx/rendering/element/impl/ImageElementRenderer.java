@@ -39,8 +39,8 @@ public class ImageElementRenderer implements IElementRenderer<GDXRenderContext, 
 
         Batch batch = context.getBatch();
 
-        int rx = (int) AbstractElement.getRealX(context.getViewport().getWorldWidth(), element);
-        int ry = (int) AbstractElement.getRealY(context.getViewport().getWorldHeight(), element);
+        int rx = (int) AbstractElement.getRealX(context.getVPSize().x, element);
+        int ry = (int) AbstractElement.getRealY(context.getVPSize().y, element);
 
         Color color = batch.getColor();
         ImageElement.Origin origin = element.getOrigin();

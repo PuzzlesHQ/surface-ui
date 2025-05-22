@@ -23,6 +23,8 @@ public class GDXRenderContext extends AbstractRenderContext {
         this.batch = batch;
         this.viewport = viewport;
         this.camera = camera;
+        if (viewport == null) return;
+
         this.setVpSize(viewport.getWorldWidth(), viewport.getWorldHeight());
     }
 

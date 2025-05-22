@@ -31,6 +31,7 @@ public class SurfaceUIGdx extends AbstractSurfaceModule<GDXRenderContext> {
         this.register(ToggleButtonElement.class, new ToggleButtonElementRenderer());
         this.register(TabbedSliderBar.class, new TabbedSliderBarElementRenderer());
         this.register(ImageElement.class, new ImageElementRenderer());
+        this.register(PanelElement.class, new PanelElementRenderer());
     }
 
 }

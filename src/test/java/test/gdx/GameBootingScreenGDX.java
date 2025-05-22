@@ -1,12 +1,16 @@
 package test.gdx;
 
-import dev.puzzleshq.surface.gdx.screens.AbstractGdxSurface;
+import dev.puzzleshq.surface.api.screens.AbstractSurfaceGeneric;
 import test.SurfaceSetup;
 
-public class GameBootingScreenGDX extends AbstractGdxSurface {
+public class GameBootingScreenGDX extends AbstractSurfaceGeneric {
 
-    public GameBootingScreenGDX() {
+    public GameBootingScreenGDX() {}
+
+    @Override
+    public void init() {
+        super.init();
+
         SurfaceSetup.setup(this);
     }
-
 }

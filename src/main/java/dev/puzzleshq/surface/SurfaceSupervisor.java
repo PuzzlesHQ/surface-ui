@@ -57,6 +57,8 @@ public class SurfaceSupervisor {
     public static void renderCurrentSurface(IRenderContext context) {
         ISurface surface = getCurrentSurface();
         surface.setContext(context);
+
+        if (!surface.isInitialized()) surface.init();
         try {
             surface.render();
         } catch (Exception e) {

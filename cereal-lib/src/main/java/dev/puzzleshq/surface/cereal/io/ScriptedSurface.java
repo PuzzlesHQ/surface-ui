@@ -75,7 +75,6 @@ public class ScriptedSurface extends AbstractSurfaceGeneric<IRenderContext> {
             context.clearScreenWithColor(backgroundColor);
         if (this.onRender != null && this.onRender instanceof Function && this.scope != null) {
             Context.call(ContextFactory.getGlobal(), (Function) this.onRender, scope, scope, new Object[]{ context });
-//            ((Function) this.onRender).call(surfaceContext, scope, scope, new Object[]{ context });
         }
         for (IElement element : getElementCollection()) {
             ((IElementRenderer)context.getParentModule().getElementRenderer(element.getClass())).render(

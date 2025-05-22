@@ -1,6 +1,8 @@
 package test;
 
+import dev.puzzleshq.surface.api.element.impl.PanelElement;
 import dev.puzzleshq.surface.api.element.impl.ProgressBarElement;
+import dev.puzzleshq.surface.api.element.styles.PanelStyle;
 import dev.puzzleshq.surface.api.element.styles.ProgressBarStyle;
 import dev.puzzleshq.surface.api.rendering.AnchorX;
 import dev.puzzleshq.surface.api.rendering.AnchorY;
@@ -25,6 +27,13 @@ public class SurfaceSetup {
     );
 
     public static void setup(ISurface<?> surface) {
+        PanelElement element = new PanelElement(new PanelStyle(Color.BLUE));
+        element.setAnchors(AnchorX.CENTER, AnchorY.CENTER);
+
+        PanelElement superPanel = new PanelElement(new PanelStyle(Color.RED));
+        superPanel.setSize(600, 600);
+        superPanel.setAnchors(AnchorX.CENTER, AnchorY.CENTER);
+
         Runtime r = Runtime.getRuntime();
         int ramRange = (int) (r.maxMemory() / (1024 * 1024));
 
@@ -53,10 +62,13 @@ public class SurfaceSetup {
 //        ButtonElement buttonElement = new ButtonElement(ButtonStyle.DEFAULT);
 //        buttonElement.setAnchors(AnchorX.RIGHT, AnchorY.TOP);
 
-        surface.addElement("ram-usage-bar", ramUsageBar);
-        surface.addElement("progress-bar-1", bar1);
-        surface.addElement("progress-bar-2", bar2);
-        surface.addElement("progress-bar-3", bar3);
+        element.addElement("ram-usage-bar", ramUsageBar);
+        element.addElement("progress-bar-1", bar1);
+        element.addElement("progress-bar-2", bar2);
+        element.addElement("progress-bar-3", bar3);
+
+        superPanel.addElement("panel", element);
+        surface.addElement("super-panel", superPanel);
 //        surface.addElement(buttonElement);
     }
 
